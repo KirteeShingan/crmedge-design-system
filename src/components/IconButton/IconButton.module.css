@@ -1,0 +1,200 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius-xs);
+  padding: 0;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    box-shadow 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-background-page), 0 0 0 4px var(--color-border-focus);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+/* ----- Sizes (square) ----- */
+.size_sm {
+  width: var(--size-32);
+  height: var(--size-32);
+  font-size: 16px;
+}
+
+.size_md {
+  width: var(--size-40);
+  height: var(--size-40);
+  font-size: 20px;
+}
+
+.size_lg {
+  width: var(--size-48);
+  height: var(--size-48);
+  font-size: 24px;
+}
+
+/* ----- Filled / Primary ----- */
+.variant_filled.tone_primary {
+  background-color: var(--color-brand-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-brand-primary);
+}
+.variant_filled.tone_primary:hover:not(:disabled) {
+  background-color: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
+}
+.variant_filled.tone_primary:active:not(:disabled) {
+  background-color: var(--color-brand-primary-active);
+  border-color: var(--color-brand-primary-active);
+}
+.variant_filled.tone_primary:disabled {
+  background-color: var(--color-secondary-neutral-200);
+  border-color: var(--color-secondary-neutral-200);
+  color: var(--color-text-disabled);
+}
+
+/* ----- Filled / Secondary ----- */
+.variant_filled.tone_secondary {
+  background-color: var(--color-secondary-neutral-100);
+  color: var(--color-text-default);
+  border-color: var(--color-secondary-neutral-100);
+}
+.variant_filled.tone_secondary:hover:not(:disabled) {
+  background-color: var(--color-secondary-neutral-200);
+  border-color: var(--color-secondary-neutral-200);
+}
+.variant_filled.tone_secondary:active:not(:disabled) {
+  background-color: var(--color-secondary-neutral-300);
+  border-color: var(--color-secondary-neutral-300);
+}
+.variant_filled.tone_secondary:disabled {
+  background-color: var(--color-secondary-neutral-100);
+  border-color: var(--color-secondary-neutral-100);
+  color: var(--color-text-disabled);
+}
+
+/* ----- Outlined / Primary ----- */
+.variant_outlined.tone_primary {
+  background-color: transparent;
+  color: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+}
+.variant_outlined.tone_primary:hover:not(:disabled) {
+  background-color: var(--color-brand-primary-subtle);
+}
+.variant_outlined.tone_primary:active:not(:disabled) {
+  background-color: var(--color-brand-primary-subtle);
+  color: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
+}
+.variant_outlined.tone_primary:disabled {
+  background-color: transparent;
+  border-color: var(--color-border-default);
+  color: var(--color-text-disabled);
+}
+
+/* ----- Outlined / Secondary ----- */
+.variant_outlined.tone_secondary {
+  background-color: transparent;
+  color: var(--color-text-default);
+  border-color: var(--color-border-default);
+}
+.variant_outlined.tone_secondary:hover:not(:disabled) {
+  background-color: var(--color-interaction-hover);
+  border-color: var(--color-border-subtle);
+}
+.variant_outlined.tone_secondary:active:not(:disabled) {
+  background-color: var(--color-interaction-hover);
+  border-color: var(--color-border-strong);
+}
+.variant_outlined.tone_secondary:disabled {
+  background-color: transparent;
+  border-color: var(--color-border-default);
+  color: var(--color-text-disabled);
+}
+
+/* ----- Text / Primary (was "Icon Only" in Figma) ----- */
+.variant_text.tone_primary {
+  background-color: transparent;
+  color: var(--color-brand-primary);
+  border-color: transparent;
+}
+.variant_text.tone_primary:hover:not(:disabled) {
+  background-color: var(--color-brand-primary-subtle);
+}
+.variant_text.tone_primary:active:not(:disabled) {
+  background-color: var(--color-brand-primary-subtle);
+  color: var(--color-brand-primary-hover);
+}
+.variant_text.tone_primary:disabled {
+  color: var(--color-text-disabled);
+}
+
+/* ----- Text / Secondary ----- */
+.variant_text.tone_secondary {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border-color: transparent;
+}
+.variant_text.tone_secondary:hover:not(:disabled) {
+  background-color: var(--color-interaction-hover);
+  color: var(--color-text-default);
+}
+.variant_text.tone_secondary:active:not(:disabled) {
+  background-color: var(--color-interaction-hover);
+  color: var(--color-text-default);
+}
+.variant_text.tone_secondary:disabled {
+  color: var(--color-text-disabled);
+}
+
+/* ----- Loading ----- */
+.loading {
+  cursor: progress;
+}
+
+.spinner {
+  flex-shrink: 0;
+  animation: icon-button-spin 720ms linear infinite;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon > svg {
+  width: 1em;
+  height: 1em;
+}
+
+@keyframes icon-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  .spinner {
+    animation-duration: 2400ms;
+  }
+}
