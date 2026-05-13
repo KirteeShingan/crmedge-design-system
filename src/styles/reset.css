@@ -1,0 +1,41 @@
+/*
+ * Minimal reset. Intentionally tiny — only the rules that keep the box
+ * model and typography predictable enough for components to be built on
+ * top. No opinionated style stripping (lists, headings, etc.).
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base, system-ui, sans-serif);
+  color: var(--color-text-default, #131417);
+  background-color: var(--color-background-page, #ffffff);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}

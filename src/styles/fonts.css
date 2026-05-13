@@ -1,0 +1,51 @@
+/*
+ * Font loading + font-family stacks.
+ *
+ * Inter — body / UI text (loaded from Google Fonts).
+ * Roboto — fallback for Gilroy (Gilroy is licensed; if its woff2 files are
+ *   absent under /fonts/Gilroy/, the cascade lands on Roboto instead of a
+ *   bare system sans-serif).
+ * Gilroy — button typography. Drop licensed `.woff2` files into
+ *   `public/fonts/Gilroy/` to activate; until then the @font-face rules
+ *   resolve to 404 and the family falls through to Roboto.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Gilroy/Gilroy-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Gilroy/Gilroy-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Gilroy/Gilroy-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/Gilroy/Gilroy-Bold.woff2') format('woff2');
+}
+
+:root {
+  --font-family-base: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-family-display: 'Gilroy', 'Roboto', system-ui, sans-serif;
+  --font-family-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
