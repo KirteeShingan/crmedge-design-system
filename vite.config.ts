@@ -17,7 +17,11 @@ export default defineConfig({
   },
   css: {
     modules: {
-      localsConvention: "camelCaseOnly",
+      // Export BOTH original (snake_case) and camelCase keys.
+      // Component code uses `styles[`variant_${variant}`]` lookups
+      // which require the original key — "camelCaseOnly" drops it
+      // and was silently rendering buttons without their variant styles.
+      localsConvention: "camelCase",
     },
   },
 });
