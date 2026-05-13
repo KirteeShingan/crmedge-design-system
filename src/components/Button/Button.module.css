@@ -1,10 +1,18 @@
+/*
+ * Button — strict 1:1 mapping to Figma master 46:223361 (CRM-DS V1.0).
+ * Properties: Type (primary/secondary/tertiary) × Height (medium/small) × State.
+ * Figma merges Hover and Pressed into one visual; :hover and :active share rules.
+ * Disabled = opacity 0.5 on the enabled style (no separate disabled tokens).
+ */
+
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--size-4);
   border: 1px solid transparent;
   border-radius: var(--radius-xs);
-  font-family: var(--font-family-display);
+  font-family: var(--font-family-base);
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
@@ -14,25 +22,25 @@
   transition:
     background-color 120ms ease,
     border-color 120ms ease,
-    color 120ms ease;
+    color 120ms ease,
+    opacity 120ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 
 .button:disabled {
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
-/* ----- Sizes (per Figma master 46:223361) ----- */
+/* ----- Sizes ----- */
 .size_medium {
   height: var(--size-36);
-  padding: var(--spacing-xs) var(--spacing-s); /* 8 12 */
-  gap: var(--spacing-xs); /* 8 */
+  padding: var(--size-8) var(--size-12);
 }
 
 .size_small {
   height: var(--size-24);
-  padding: var(--size-2) var(--spacing-xs); /* 2 8 */
-  gap: var(--spacing-xxs); /* 4 */
+  padding: var(--size-2) var(--size-8);
 }
 
 /* Icon slot — fixed 20×20 per Figma (same for both sizes) */
@@ -54,107 +62,41 @@
   display: inline-block;
 }
 
-/*
- * State note: Figma merges Hover and Pressed into one visual state.
- * :hover and :active share the same rules.
- * Focus is intentionally unstyled here — browser default outline applies
- * for keyboard users; a styled Focus state is a deferred Figma reverse-feed.
- */
-
-/* ----- Filled / Primary ----- */
-.variant_filled.tone_primary {
+/* ----- Type: Primary (filled) ----- */
+.variant_primary {
   background-color: var(--color-brand-primary);
   color: var(--color-text-inverse);
   border-color: var(--color-brand-primary);
 }
-.variant_filled.tone_primary:hover:not(:disabled),
-.variant_filled.tone_primary:active:not(:disabled) {
+.variant_primary:hover:not(:disabled),
+.variant_primary:active:not(:disabled) {
   background-color: var(--color-brand-primary-hover);
   border-color: var(--color-brand-primary-hover);
 }
-.variant_filled.tone_primary:disabled {
-  background-color: var(--color-secondary-neutral-200);
-  border-color: var(--color-secondary-neutral-200);
-  color: var(--color-text-disabled);
-}
 
-/* ----- Filled / Secondary ----- */
-.variant_filled.tone_secondary {
-  background-color: var(--color-secondary-neutral-100);
-  color: var(--color-text-default);
-  border-color: var(--color-secondary-neutral-100);
-}
-.variant_filled.tone_secondary:hover:not(:disabled),
-.variant_filled.tone_secondary:active:not(:disabled) {
-  background-color: var(--color-secondary-neutral-200);
-  border-color: var(--color-secondary-neutral-200);
-}
-.variant_filled.tone_secondary:disabled {
-  background-color: var(--color-secondary-neutral-100);
-  border-color: var(--color-secondary-neutral-100);
-  color: var(--color-text-disabled);
-}
-
-/* ----- Outlined / Primary ----- */
-.variant_outlined.tone_primary {
+/* ----- Type: Secondary (outlined) ----- */
+.variant_secondary {
   background-color: transparent;
   color: var(--color-brand-primary);
   border-color: var(--color-brand-primary);
 }
-.variant_outlined.tone_primary:hover:not(:disabled),
-.variant_outlined.tone_primary:active:not(:disabled) {
+.variant_secondary:hover:not(:disabled),
+.variant_secondary:active:not(:disabled) {
   background-color: var(--color-brand-primary-subtle);
-}
-.variant_outlined.tone_primary:disabled {
-  background-color: transparent;
-  border-color: var(--color-border-default);
-  color: var(--color-text-disabled);
+  color: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
 }
 
-/* ----- Outlined / Secondary ----- */
-.variant_outlined.tone_secondary {
-  background-color: transparent;
-  color: var(--color-text-default);
-  border-color: var(--color-border-default);
-}
-.variant_outlined.tone_secondary:hover:not(:disabled),
-.variant_outlined.tone_secondary:active:not(:disabled) {
-  background-color: var(--color-interaction-hover);
-  border-color: var(--color-border-subtle);
-}
-.variant_outlined.tone_secondary:disabled {
-  background-color: transparent;
-  border-color: var(--color-border-default);
-  color: var(--color-text-disabled);
-}
-
-/* ----- Text / Primary ----- */
-.variant_text.tone_primary {
+/* ----- Type: Tertiary (text) ----- */
+.variant_tertiary {
   background-color: transparent;
   color: var(--color-brand-primary);
   border-color: transparent;
 }
-.variant_text.tone_primary:hover:not(:disabled),
-.variant_text.tone_primary:active:not(:disabled) {
-  background-color: var(--color-brand-primary-subtle);
-}
-.variant_text.tone_primary:disabled {
-  color: var(--color-text-disabled);
-}
-
-/* ----- Text / Secondary ----- */
-.variant_text.tone_secondary {
-  background-color: transparent;
-  color: var(--color-text-secondary);
-  border-color: transparent;
-}
-.variant_text.tone_secondary:hover:not(:disabled),
-.variant_text.tone_secondary:active:not(:disabled) {
+.variant_tertiary:hover:not(:disabled),
+.variant_tertiary:active:not(:disabled) {
   background-color: var(--color-interaction-hover);
-  color: var(--color-text-default);
-}
-.variant_text.tone_secondary:disabled {
-  color: var(--color-text-disabled);
+  color: var(--color-brand-primary-hover);
 }
 
 @media (prefers-reduced-motion: reduce) {
