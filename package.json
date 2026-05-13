@@ -19,7 +19,6 @@
     "tokens:build": "tsx scripts/build-tokens.ts",
     "tokens": "npm run tokens:pull && npm run tokens:build",
     "code-connect:publish": "figma connect publish",
-    "deploy-storybook": "storybook-to-ghpages",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
@@ -34,7 +33,6 @@
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-themes": "^8.6.18",
     "@storybook/react-vite": "^8.6.18",
-    "@storybook/storybook-deployer": "^2.8.16",
     "@types/node": "^25.7.0",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
