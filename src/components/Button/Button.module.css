@@ -2,57 +2,64 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs);
   border: 1px solid transparent;
   border-radius: var(--radius-xs);
   font-family: var(--font-family-display);
   font-weight: 600;
-  line-height: 1;
+  font-size: 14px;
+  line-height: 20px;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
   transition:
     background-color 120ms ease,
     border-color 120ms ease,
-    color 120ms ease,
-    box-shadow 120ms ease;
+    color 120ms ease;
   -webkit-tap-highlight-color: transparent;
-}
-
-.button:focus {
-  outline: none;
-}
-
-.button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--color-background-page), 0 0 0 4px var(--color-border-focus);
 }
 
 .button:disabled {
   cursor: not-allowed;
 }
 
-/* ----- Sizes ----- */
-.size_sm {
-  height: var(--size-32);
-  padding: 0 var(--spacing-s);
-  font-size: 13px;
-  gap: var(--spacing-xs);
+/* ----- Sizes (per Figma master 46:223361) ----- */
+.size_medium {
+  height: var(--size-36);
+  padding: var(--spacing-xs) var(--spacing-s); /* 8 12 */
+  gap: var(--spacing-xs); /* 8 */
 }
 
-.size_md {
-  height: var(--size-40);
-  padding: 0 var(--spacing-m);
-  font-size: 14px;
-  gap: var(--spacing-xs);
+.size_small {
+  height: var(--size-24);
+  padding: var(--size-2) var(--spacing-xs); /* 2 8 */
+  gap: var(--spacing-xxs); /* 4 */
 }
 
-.size_lg {
-  height: var(--size-48);
-  padding: 0 var(--spacing-l);
-  font-size: 16px;
-  gap: var(--spacing-s);
+/* Icon slot — fixed 20×20 per Figma (same for both sizes) */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
 }
+
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.label {
+  display: inline-block;
+}
+
+/*
+ * State note: Figma merges Hover and Pressed into one visual state.
+ * :hover and :active share the same rules.
+ * Focus is intentionally unstyled here — browser default outline applies
+ * for keyboard users; a styled Focus state is a deferred Figma reverse-feed.
+ */
 
 /* ----- Filled / Primary ----- */
 .variant_filled.tone_primary {
@@ -60,13 +67,10 @@
   color: var(--color-text-inverse);
   border-color: var(--color-brand-primary);
 }
-.variant_filled.tone_primary:hover:not(:disabled) {
+.variant_filled.tone_primary:hover:not(:disabled),
+.variant_filled.tone_primary:active:not(:disabled) {
   background-color: var(--color-brand-primary-hover);
   border-color: var(--color-brand-primary-hover);
-}
-.variant_filled.tone_primary:active:not(:disabled) {
-  background-color: var(--color-brand-primary-active);
-  border-color: var(--color-brand-primary-active);
 }
 .variant_filled.tone_primary:disabled {
   background-color: var(--color-secondary-neutral-200);
@@ -80,13 +84,10 @@
   color: var(--color-text-default);
   border-color: var(--color-secondary-neutral-100);
 }
-.variant_filled.tone_secondary:hover:not(:disabled) {
+.variant_filled.tone_secondary:hover:not(:disabled),
+.variant_filled.tone_secondary:active:not(:disabled) {
   background-color: var(--color-secondary-neutral-200);
   border-color: var(--color-secondary-neutral-200);
-}
-.variant_filled.tone_secondary:active:not(:disabled) {
-  background-color: var(--color-secondary-neutral-300);
-  border-color: var(--color-secondary-neutral-300);
 }
 .variant_filled.tone_secondary:disabled {
   background-color: var(--color-secondary-neutral-100);
@@ -100,13 +101,9 @@
   color: var(--color-brand-primary);
   border-color: var(--color-brand-primary);
 }
-.variant_outlined.tone_primary:hover:not(:disabled) {
-  background-color: var(--color-brand-primary-subtle);
-}
+.variant_outlined.tone_primary:hover:not(:disabled),
 .variant_outlined.tone_primary:active:not(:disabled) {
   background-color: var(--color-brand-primary-subtle);
-  color: var(--color-brand-primary-hover);
-  border-color: var(--color-brand-primary-hover);
 }
 .variant_outlined.tone_primary:disabled {
   background-color: transparent;
@@ -120,13 +117,10 @@
   color: var(--color-text-default);
   border-color: var(--color-border-default);
 }
-.variant_outlined.tone_secondary:hover:not(:disabled) {
-  background-color: var(--color-interaction-hover);
-  border-color: var(--color-border-subtle);
-}
+.variant_outlined.tone_secondary:hover:not(:disabled),
 .variant_outlined.tone_secondary:active:not(:disabled) {
   background-color: var(--color-interaction-hover);
-  border-color: var(--color-border-strong);
+  border-color: var(--color-border-subtle);
 }
 .variant_outlined.tone_secondary:disabled {
   background-color: transparent;
@@ -140,12 +134,9 @@
   color: var(--color-brand-primary);
   border-color: transparent;
 }
-.variant_text.tone_primary:hover:not(:disabled) {
-  background-color: var(--color-brand-primary-subtle);
-}
+.variant_text.tone_primary:hover:not(:disabled),
 .variant_text.tone_primary:active:not(:disabled) {
   background-color: var(--color-brand-primary-subtle);
-  color: var(--color-brand-primary-hover);
 }
 .variant_text.tone_primary:disabled {
   color: var(--color-text-disabled);
@@ -157,10 +148,7 @@
   color: var(--color-text-secondary);
   border-color: transparent;
 }
-.variant_text.tone_secondary:hover:not(:disabled) {
-  background-color: var(--color-interaction-hover);
-  color: var(--color-text-default);
-}
+.variant_text.tone_secondary:hover:not(:disabled),
 .variant_text.tone_secondary:active:not(:disabled) {
   background-color: var(--color-interaction-hover);
   color: var(--color-text-default);
@@ -169,43 +157,8 @@
   color: var(--color-text-disabled);
 }
 
-/* ----- Loading ----- */
-.loading {
-  cursor: progress;
-}
-
-.spinner {
-  flex-shrink: 0;
-  animation: button-spin 720ms linear infinite;
-}
-
-.icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.icon > svg {
-  width: 1em;
-  height: 1em;
-}
-
-.label {
-  display: inline-block;
-}
-
-@keyframes button-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .button {
     transition: none;
-  }
-  .spinner {
-    animation-duration: 2400ms;
   }
 }

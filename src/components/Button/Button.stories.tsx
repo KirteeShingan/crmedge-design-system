@@ -5,27 +5,27 @@ import type { ButtonSize, ButtonTone, ButtonVariant } from "./Button";
 
 const VARIANTS: ButtonVariant[] = ["filled", "outlined", "text"];
 const TONES: ButtonTone[] = ["primary", "secondary"];
-const SIZES: ButtonSize[] = ["sm", "md", "lg"];
+const SIZES: ButtonSize[] = ["small", "medium"];
 
-const ArrowIcon = () => (
-  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+const PlusIcon = () => (
+  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path
-      d="M3 8h10m0 0-4-4m4 4-4 4"
+      d="M10 4v12M4 10h12"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
-      strokeLinejoin="round"
     />
   </svg>
 );
 
-const PlusIcon = () => (
-  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+const ArrowIcon = () => (
+  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path
-      d="M8 3v10M3 8h10"
+      d="M4 10h12m0 0-5-5m5 5-5 5"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="2"
       strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -49,17 +49,15 @@ const meta: Meta<typeof Button> = {
       control: { type: "inline-radio" },
       options: SIZES,
     },
-    loading: { control: "boolean" },
     disabled: { control: "boolean" },
     children: { control: "text" },
   },
   args: {
     variant: "filled",
     tone: "primary",
-    size: "md",
-    loading: false,
+    size: "medium",
     disabled: false,
-    children: "Continue",
+    children: "Button",
   },
 };
 
@@ -71,7 +69,7 @@ type Story = StoryObj<typeof Button>;
 
 export const Playground: Story = {};
 
-/* ---------- Variant × Tone matrix ---------- */
+/* ---------- Shared styles ---------- */
 
 const sectionStyle: CSSProperties = {
   fontFamily: "var(--font-family-base)",
@@ -119,6 +117,8 @@ const Cell = ({
   </div>
 );
 
+/* ---------- Variant × Tone matrix ---------- */
+
 export const VariantsAndTones: Story = {
   parameters: { layout: "fullscreen" },
   render: () => (
@@ -130,7 +130,7 @@ export const VariantsAndTones: Story = {
             {VARIANTS.map((variant) => (
               <Cell key={variant} label={variant}>
                 <Button variant={variant} tone={tone}>
-                  Continue
+                  Button
                 </Button>
               </Cell>
             ))}
@@ -163,7 +163,7 @@ export const Sizes: Story = {
                   tone={tone}
                   size={size}
                 >
-                  Continue
+                  Button
                 </Button>
               ))}
             </div>
@@ -174,7 +174,7 @@ export const Sizes: Story = {
   ),
 };
 
-/* ---------- States ---------- */
+/* ---------- States (Enabled / Hover-Pressed / Disabled) ---------- */
 
 export const States: Story = {
   parameters: { layout: "fullscreen" },
@@ -187,29 +187,19 @@ export const States: Story = {
               {variant} · {tone}
             </div>
             <div style={rowStyle}>
-              <Cell label="default">
+              <Cell label="enabled">
                 <Button variant={variant} tone={tone}>
-                  Continue
+                  Button
                 </Button>
               </Cell>
-              <Cell label="hover (force :hover via devtools)">
+              <Cell label="hover / pressed (force in devtools)">
                 <Button variant={variant} tone={tone}>
-                  Continue
-                </Button>
-              </Cell>
-              <Cell label="focus (tab to it)">
-                <Button variant={variant} tone={tone}>
-                  Continue
+                  Button
                 </Button>
               </Cell>
               <Cell label="disabled">
                 <Button variant={variant} tone={tone} disabled>
-                  Continue
-                </Button>
-              </Cell>
-              <Cell label="loading">
-                <Button variant={variant} tone={tone} loading>
-                  Continue
+                  Button
                 </Button>
               </Cell>
             </div>
@@ -260,19 +250,13 @@ export const WithIcons: Story = {
               iconLeft={<PlusIcon />}
               iconRight={<ArrowIcon />}
             >
-              Action
+              Button
             </Button>
           ))}
         </div>
       </div>
     </div>
   ),
-};
-
-/* ---------- Loading ---------- */
-
-export const Loading: Story = {
-  args: { loading: true },
 };
 
 /* ---------- Disabled ---------- */
