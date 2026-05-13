@@ -2,13 +2,11 @@ import { forwardRef } from "react";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./Button.module.css";
 
-export type ButtonVariant = "filled" | "outlined" | "text";
-export type ButtonTone = "primary" | "secondary";
+export type ButtonVariant = "primary" | "secondary" | "tertiary";
 export type ButtonSize = "small" | "medium";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
-  tone?: ButtonTone;
   size?: ButtonSize;
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
@@ -20,8 +18,7 @@ const cx = (...classes: Array<string | false | undefined>): string =>
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(props, ref) {
     const {
-      variant = "filled",
-      tone = "primary",
+      variant = "primary",
       size = "medium",
       disabled = false,
       iconLeft,
@@ -41,7 +38,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cx(
           styles.button,
           styles[`variant_${variant}`],
-          styles[`tone_${tone}`],
           styles[`size_${size}`],
           className,
         )}
