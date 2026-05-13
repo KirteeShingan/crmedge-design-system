@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { CSSProperties, ReactNode } from "react";
 import { Button } from "./Button";
-import type { ButtonSize, ButtonTone, ButtonVariant } from "./Button";
+import type { ButtonSize, ButtonVariant } from "./Button";
 
-const VARIANTS: ButtonVariant[] = ["filled", "outlined", "text"];
-const TONES: ButtonTone[] = ["primary", "secondary"];
+const VARIANTS: ButtonVariant[] = ["primary", "secondary", "tertiary"];
 const SIZES: ButtonSize[] = ["small", "medium"];
 
 const PlusIcon = () => (
@@ -41,10 +40,6 @@ const meta: Meta<typeof Button> = {
       control: { type: "inline-radio" },
       options: VARIANTS,
     },
-    tone: {
-      control: { type: "inline-radio" },
-      options: TONES,
-    },
     size: {
       control: { type: "inline-radio" },
       options: SIZES,
@@ -53,8 +48,7 @@ const meta: Meta<typeof Button> = {
     children: { control: "text" },
   },
   args: {
-    variant: "filled",
-    tone: "primary",
+    variant: "primary",
     size: "medium",
     disabled: false,
     children: "Button",
@@ -99,7 +93,7 @@ const rowStyle: CSSProperties = {
 const columnLabelStyle: CSSProperties = {
   fontSize: "12px",
   color: "var(--color-text-secondary)",
-  minWidth: "120px",
+  minWidth: "100px",
 };
 
 const Cell = ({
@@ -117,26 +111,22 @@ const Cell = ({
   </div>
 );
 
-/* ---------- Variant × Tone matrix ---------- */
+/* ---------- Types (Primary / Secondary / Tertiary) ---------- */
 
-export const VariantsAndTones: Story = {
+export const Types: Story = {
   parameters: { layout: "fullscreen" },
   render: () => (
     <div style={sectionStyle}>
-      {TONES.map((tone) => (
-        <div key={tone}>
-          <div style={sectionTitleStyle}>{tone}</div>
-          <div style={rowStyle}>
-            {VARIANTS.map((variant) => (
-              <Cell key={variant} label={variant}>
-                <Button variant={variant} tone={tone}>
-                  Button
-                </Button>
-              </Cell>
-            ))}
-          </div>
+      <div>
+        <div style={sectionTitleStyle}>action hierarchy</div>
+        <div style={rowStyle}>
+          {VARIANTS.map((variant) => (
+            <Cell key={variant} label={variant}>
+              <Button variant={variant}>Button</Button>
+            </Cell>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   ),
 };
@@ -147,26 +137,13 @@ export const Sizes: Story = {
   parameters: { layout: "fullscreen" },
   render: () => (
     <div style={sectionStyle}>
-      {TONES.map((tone) => (
-        <div key={tone}>
-          <div style={sectionTitleStyle}>{tone}</div>
-          {VARIANTS.map((variant) => (
-            <div
-              key={variant}
-              style={{ ...rowStyle, marginBottom: "16px" }}
-            >
-              <span style={columnLabelStyle}>{variant}</span>
-              {SIZES.map((size) => (
-                <Button
-                  key={size}
-                  variant={variant}
-                  tone={tone}
-                  size={size}
-                >
-                  Button
-                </Button>
-              ))}
-            </div>
+      {VARIANTS.map((variant) => (
+        <div key={variant} style={{ ...rowStyle, marginBottom: "16px" }}>
+          <span style={columnLabelStyle}>{variant}</span>
+          {SIZES.map((size) => (
+            <Button key={size} variant={variant} size={size}>
+              Button
+            </Button>
           ))}
         </div>
       ))}
@@ -180,32 +157,24 @@ export const States: Story = {
   parameters: { layout: "fullscreen" },
   render: () => (
     <div style={sectionStyle}>
-      {VARIANTS.map((variant) =>
-        TONES.map((tone) => (
-          <div key={`${variant}-${tone}`}>
-            <div style={sectionTitleStyle}>
-              {variant} · {tone}
-            </div>
-            <div style={rowStyle}>
-              <Cell label="enabled">
-                <Button variant={variant} tone={tone}>
-                  Button
-                </Button>
-              </Cell>
-              <Cell label="hover / pressed (force in devtools)">
-                <Button variant={variant} tone={tone}>
-                  Button
-                </Button>
-              </Cell>
-              <Cell label="disabled">
-                <Button variant={variant} tone={tone} disabled>
-                  Button
-                </Button>
-              </Cell>
-            </div>
+      {VARIANTS.map((variant) => (
+        <div key={variant}>
+          <div style={sectionTitleStyle}>{variant}</div>
+          <div style={rowStyle}>
+            <Cell label="enabled">
+              <Button variant={variant}>Button</Button>
+            </Cell>
+            <Cell label="hover / pressed (force in devtools)">
+              <Button variant={variant}>Button</Button>
+            </Cell>
+            <Cell label="disabled">
+              <Button variant={variant} disabled>
+                Button
+              </Button>
+            </Cell>
           </div>
-        )),
-      )}
+        </div>
+      ))}
     </div>
   ),
 };
