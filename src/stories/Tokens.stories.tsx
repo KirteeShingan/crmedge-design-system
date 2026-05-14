@@ -10,15 +10,20 @@ import type { CSSProperties, ReactNode } from 'react';
  * Replace or remove once real component stories exist.
  */
 
-const RAMPS = [
-  { name: 'Primary · Blue', prefix: 'color-primary-blue' },
-  { name: 'Secondary · Neutral', prefix: 'color-secondary-neutral' },
-  { name: 'Accent · Green', prefix: 'color-accent-green' },
-  { name: 'Accent · Yellow', prefix: 'color-accent-yellow' },
-  { name: 'Accent · Red', prefix: 'color-accent-red' },
-] as const;
+const DEFAULT_RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
+const ORANGE_RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800] as const;
 
-const RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
+const RAMPS: ReadonlyArray<{
+  name: string;
+  prefix: string;
+  steps: ReadonlyArray<number>;
+}> = [
+  { name: 'Primary · Orange', prefix: 'color-primary-orange', steps: ORANGE_RAMP_STEPS },
+  { name: 'Secondary · Neutral', prefix: 'color-secondary-neutral', steps: DEFAULT_RAMP_STEPS },
+  { name: 'Accent · Green', prefix: 'color-accent-green', steps: DEFAULT_RAMP_STEPS },
+  { name: 'Accent · Yellow', prefix: 'color-accent-yellow', steps: DEFAULT_RAMP_STEPS },
+  { name: 'Accent · Red', prefix: 'color-accent-red', steps: DEFAULT_RAMP_STEPS },
+];
 
 const PRIMITIVE_BACKGROUNDS = [
   'background-white',
@@ -26,6 +31,8 @@ const PRIMITIVE_BACKGROUNDS = [
   'background-black',
   'background-navy-blue',
 ] as const;
+
+const OTHER_PRIMITIVES = ['primary-charcoal'] as const;
 
 const SEMANTIC_GROUPS = [
   {
@@ -40,11 +47,11 @@ const SEMANTIC_GROUPS = [
   {
     title: 'Brand',
     tokens: [
-      { name: 'brand-primary', aliasOf: 'primary-blue-500' },
-      { name: 'brand-primary-hover', aliasOf: 'primary-blue-600' },
-      { name: 'brand-primary-active', aliasOf: 'primary-blue-700' },
-      { name: 'brand-primary-subtle', aliasOf: 'primary-blue-100' },
-      { name: 'brand-primary-light', aliasOf: 'primary-blue-50' },
+      { name: 'brand-primary', aliasOf: 'primary-orange-500' },
+      { name: 'brand-primary-hover', aliasOf: 'primary-orange-600' },
+      { name: 'brand-primary-active', aliasOf: 'primary-orange-700' },
+      { name: 'brand-primary-subtle', aliasOf: 'primary-orange-100' },
+      { name: 'brand-primary-light', aliasOf: 'primary-orange-50' },
       { name: 'brand-navy', aliasOf: 'background-navy-blue' },
     ],
   },
@@ -56,8 +63,8 @@ const SEMANTIC_GROUPS = [
       { name: 'text-tertiary', aliasOf: 'secondary-neutral-500' },
       { name: 'text-disabled', aliasOf: 'secondary-neutral-400' },
       { name: 'text-inverse', aliasOf: 'background-white' },
-      { name: 'text-link', aliasOf: 'primary-blue-500' },
-      { name: 'text-link-hover', aliasOf: 'primary-blue-600' },
+      { name: 'text-link', aliasOf: 'primary-orange-500' },
+      { name: 'text-link-hover', aliasOf: 'primary-orange-600' },
     ],
   },
   {
@@ -65,7 +72,7 @@ const SEMANTIC_GROUPS = [
     tokens: [
       { name: 'border-default', aliasOf: 'secondary-neutral-200' },
       { name: 'border-strong', aliasOf: 'secondary-neutral-400' },
-      { name: 'border-focus', aliasOf: 'primary-blue-500' },
+      { name: 'border-focus', aliasOf: 'primary-orange-500' },
       { name: 'border-subtle', aliasOf: 'secondary-neutral-300' },
     ],
   },
@@ -191,18 +198,42 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-function ColorRamp({ name, prefix }: { name: string; prefix: string }) {
+function ColorRamp({
+  name,
+  prefix,
+  steps,
+}: {
+  name: string;
+  prefix: string;
+  steps: ReadonlyArray<number>;
+}) {
   return (
     <div>
       <div style={styles.rampLabel}>{name}</div>
       <div style={styles.rampRow}>
-        {RAMP_STEPS.map((step) => (
+        {steps.map((step) => (
           <div key={step} style={styles.stepCell}>
             <div style={{ ...styles.swatch, backgroundColor: `var(--${prefix}-${step})` }} />
             <div style={styles.stepLabel}>{step}</div>
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+function OtherPrimitives() {
+  return (
+    <div style={styles.semGrid}>
+      {OTHER_PRIMITIVES.map((name) => (
+        <div key={name} style={styles.semCard}>
+          <div style={{ ...styles.semChip, backgroundColor: `var(--color-${name})` }} />
+          <div>
+            <div style={styles.semName}>--color-{name}</div>
+            <div style={styles.semAlias}>primitive</div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -337,6 +368,8 @@ function Palette() {
         ))}
         <div style={{ ...styles.rampLabel, marginTop: 16 }}>Backgrounds</div>
         <PrimitiveBackgrounds />
+        <div style={{ ...styles.rampLabel, marginTop: 16 }}>Other</div>
+        <OtherPrimitives />
       </Section>
 
       <Section title="02 · Semantic Colors">
