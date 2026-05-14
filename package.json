@@ -19,7 +19,8 @@
     "tokens:build": "tsx scripts/build-tokens.ts",
     "tokens": "npm run tokens:pull && npm run tokens:build",
     "code-connect:publish": "figma connect publish",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "chromatic": "chromatic --project-token=chpt_34de6d35fb4e9c9 --exit-zero-on-changes"
   },
   "engines": {
     "node": ">=20"
@@ -37,6 +38,7 @@
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
+    "chromatic": "^16.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "storybook": "^8.6.18",
