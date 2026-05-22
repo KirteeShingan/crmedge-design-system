@@ -15,3 +15,6 @@ export type {
   IconButtonTone,
   IconButtonSize,
 } from "./components/IconButton";
+
+export { Checkbox } from "./components/Checkbox";
+export type { CheckboxProps, CheckboxSize } from "./components/Checkbox";
