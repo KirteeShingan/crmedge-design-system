@@ -1,0 +1,65 @@
+name: Chromatic
+
+# Publishes Storybook to Chromatic on every push so:
+#   - main builds become the visual-regression baseline
+#   - feature branch builds get per-branch URLs + diffs vs main
+#   - Chromatic auto-posts a check on the PR (project is linked to GitHub)
+#
+# Project token is inline (safe per Chromatic docs: project tokens are
+# write-only). Same token is already in package.json's `chromatic` script.
+
+on:
+  push:
+    branches-ignore:
+      - "dependabot/**"
+  workflow_dispatch:
+
+# Cancel in-flight runs on the same branch when a new commit lands
+concurrency:
+  group: chromatic-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  chromatic:
+    name: Publish to Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Chromatic needs full git history to detect baselines + ancestor
+          # commits across branches. Shallow clones break baseline lookup.
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build tokens
+        run: npm run tokens:build
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v11
+        with:
+          projectToken: chpt_34de6d35fb4e9c9
+          # Don't fail CI when visual changes are detected — they're
+          # reviewed in the Chromatic UI instead. Matches the local
+          # `npm run chromatic` script's --exit-zero-on-changes flag.
+          exitZeroOnChanges: true
+          # Return as soon as Storybook is uploaded; Chromatic does the
+          # snapshotting + diffing async and reports back via the GitHub
+          # check. Keeps CI runs to ~30s instead of waiting for snapshots.
+          exitOnceUploaded: true
