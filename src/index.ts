@@ -21,3 +21,12 @@ export type { CheckboxProps, CheckboxSize } from "./components/Checkbox";
 
 export { Divider } from "./components/Divider";
 export type { DividerProps, DividerOrientation } from "./components/Divider";
+
+export { Avatar } from "./components/Avatar";
+export type { AvatarProps, AvatarSize } from "./components/Avatar";
+
+export { AvatarGroup } from "./components/AvatarGroup";
+export type {
+  AvatarGroupProps,
+  AvatarGroupSpacing,
+} from "./components/AvatarGroup";
