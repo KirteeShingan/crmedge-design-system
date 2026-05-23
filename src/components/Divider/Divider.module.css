@@ -1,0 +1,31 @@
+/* Divider — 1px separator line.
+ * Mirrors Figma's table divider (master `68:283361` instance, e.g. `68:289229`):
+ *   horizontal, full-width, 1px tall, background `secondary-neutral-200`
+ *   (#dbdcdf), which is what `--color-border-default` aliases.
+ */
+
+.root {
+  flex-shrink: 0;
+  border: 0;
+}
+
+/* ---- Orientation ---- */
+.orientation_horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.orientation_vertical {
+  width: 1px;
+  height: 100%;
+  align-self: stretch;
+}
+
+/* ---- Variants ---- */
+.variant_subtle {
+  background-color: var(--color-border-default);
+}
+
+.variant_strong {
+  background-color: var(--color-border-strong);
+}
