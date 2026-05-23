@@ -17,8 +17,8 @@
   cursor: not-allowed;
 }
 
-/* Visually hidden  still focusable and accessible */input 
-.input {
+/* Visually hidden input — still focusable and accessible */
+.nativeInput {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -55,42 +55,41 @@
 .size_sm {
   width: var(--size-20);
   height: var(--size-20);
-  margin-top: 1px;
 }
 
 /* Hover (only when not disabled) */
-.row:hover .input:not(:checked):not(:indeterminate):not(:disabled) ~ .box {
+.row:hover .nativeInput:not(:checked):not(:indeterminate):not(:disabled) ~ .box {
   background-color: var(--color-accent-blue-light);
   border-color: var(--color-accent-blue-default);
 }
 
-.row:hover .input:checked:not(:disabled) ~ .box,
-.row:hover .input:indeterminate:not(:disabled) ~ .box {
+.row:hover .nativeInput:checked:not(:disabled) ~ .box,
+.row:hover .nativeInput:indeterminate:not(:disabled) ~ .box {
   background-color: var(--color-accent-blue-hover);
   border-color: var(--color-accent-blue-hover);
 }
 
 /* Checked / Indeterminate (filled) */
-.input:checked ~ .box,
-.input:indeterminate ~ .box {
+.nativeInput:checked ~ .box,
+.nativeInput:indeterminate ~ .box {
   background-color: var(--color-accent-blue-default);
   border-color: var(--color-accent-blue-default);
 }
 
 /* Focus ring */
-.input:focus-visible ~ .box {
+.nativeInput:focus-visible ~ .box {
   box-shadow: 0 0 0 3px var(--color-accent-blue-subtle);
 }
 
 /* Disabled (off) */
-.input:disabled ~ .box {
+.nativeInput:disabled ~ .box {
   background-color: var(--color-background-surface);
   border-color: var(--color-border-default);
 }
 
 /* Disabled (checked / indeterminate) */
-.input:disabled:checked ~ .box,
-.input:disabled:indeterminate ~ .box {
+.nativeInput:disabled:checked ~ .box,
+.nativeInput:disabled:indeterminate ~ .box {
   background-color: var(--color-secondary-neutral-300);
   border-color: var(--color-secondary-neutral-300);
 }
@@ -100,13 +99,13 @@
   border-color: var(--color-status-error-default);
 }
 
-.root_error .input:checked ~ .box,
-.root_error .input:indeterminate ~ .box {
+.root_error .nativeInput:checked ~ .box,
+.root_error .nativeInput:indeterminate ~ .box {
   background-color: var(--color-status-error-default);
   border-color: var(--color-status-error-default);
 }
 
-.root_error .input:focus-visible ~ .box {
+.root_error .nativeInput:focus-visible ~ .box {
   box-shadow: 0 0 0 3px var(--color-accent-red-100);
 }
 
@@ -118,12 +117,12 @@
   color: var(--color-text-inverse);
 }
 
-.input:checked ~ .box .checkmark {
+.nativeInput:checked ~ .box .checkmark {
   display: block;
 }
 
 /* Hide checkmark when indeterminate also true (defensive) */
-.input:indeterminate ~ .box .checkmark {
+.nativeInput:indeterminate ~ .box .checkmark {
   display: none;
 }
 
@@ -136,7 +135,7 @@
   border-radius: 1px;
 }
 
-.input:indeterminate ~ .box .dash {
+.nativeInput:indeterminate ~ .box .dash {
   display: block;
 }
 
@@ -147,23 +146,20 @@
   gap: var(--spacing-xxs);
 }
 
+/* Medium: shift text 2px down to optically center with the 24px box / 16px label (per Figma 2666:2) */
 .size_md ~ .text {
-  padding-top: 2px;
-}
-
-.size_sm ~ .text {
-  padding-top: 0;
+  padding-top: var(--size-2);
 }
 
 .label {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1.4;
   color: var(--color-text-default);
 }
 
 .size_sm ~ .text .label {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .requiredMark {
@@ -172,15 +168,23 @@
 }
 
 .helper {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.4;
   color: var(--color-text-tertiary);
 }
 
-.error {
+.size_sm ~ .text .helper {
   font-size: 12px;
+}
+
+.error {
+  font-size: 14px;
   line-height: 1.4;
   color: var(--color-status-error-text);
+}
+
+.size_sm ~ .text .error {
+  font-size: 12px;
 }
 
 .root_disabled .label,
