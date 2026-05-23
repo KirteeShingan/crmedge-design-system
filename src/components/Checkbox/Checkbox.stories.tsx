@@ -6,6 +6,7 @@ const meta: Meta<typeof Checkbox> = {
   title: "Components/Checkbox",
   component: Checkbox,
   parameters: { layout: "padded" },
+  args: { size: "md" },
   argTypes: {
     size: { control: "select", options: ["sm", "md"] },
     indeterminate: { control: "boolean" },
