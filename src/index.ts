@@ -18,3 +18,9 @@ export type {
 
 export { Checkbox } from "./components/Checkbox";
 export type { CheckboxProps, CheckboxSize } from "./components/Checkbox";
+
+export { StatusBadge } from "./components/StatusBadge";
+export type {
+  StatusBadgeProps,
+  StatusBadgeStatus,
+} from "./components/StatusBadge";
