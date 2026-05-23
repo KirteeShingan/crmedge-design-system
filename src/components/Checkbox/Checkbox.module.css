@@ -17,7 +17,7 @@
   cursor: not-allowed;
 }
 
-/* Visually hidden input — still focusable and accessible */
+/* Visually hidden  still focusable and accessible */input 
 .input {
   position: absolute;
   width: 1px;
