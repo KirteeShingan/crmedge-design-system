@@ -60,26 +60,26 @@
 
 /* Hover (only when not disabled) */
 .row:hover .input:not(:checked):not(:indeterminate):not(:disabled) ~ .box {
-  background-color: var(--color-brand-primary-light);
-  border-color: var(--color-brand-primary);
+  background-color: var(--color-accent-blue-light);
+  border-color: var(--color-accent-blue-default);
 }
 
 .row:hover .input:checked:not(:disabled) ~ .box,
 .row:hover .input:indeterminate:not(:disabled) ~ .box {
-  background-color: var(--color-brand-primary-hover);
-  border-color: var(--color-brand-primary-hover);
+  background-color: var(--color-accent-blue-hover);
+  border-color: var(--color-accent-blue-hover);
 }
 
 /* Checked / Indeterminate (filled) */
 .input:checked ~ .box,
 .input:indeterminate ~ .box {
-  background-color: var(--color-brand-primary);
-  border-color: var(--color-brand-primary);
+  background-color: var(--color-accent-blue-default);
+  border-color: var(--color-accent-blue-default);
 }
 
 /* Focus ring */
 .input:focus-visible ~ .box {
-  box-shadow: 0 0 0 3px var(--color-brand-primary-subtle);
+  box-shadow: 0 0 0 3px var(--color-accent-blue-subtle);
 }
 
 /* Disabled (off) */

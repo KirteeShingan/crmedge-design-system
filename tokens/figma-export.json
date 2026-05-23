@@ -1,14 +1,14 @@
 {
   "$meta": {
     "source": "Figma file DmL4gv3m10KzL2Y6yLMDJ5",
-    "pulledAt": "2026-05-13",
+    "pulledAt": "2026-05-23",
     "collections": [
-      { "name": "Colours", "id": "VariableCollectionId:55:267989", "modes": ["Mode 1"], "variableCount": 54 },
+      { "name": "Colours", "id": "VariableCollectionId:55:267989", "modes": ["Mode 1"], "variableCount": 64 },
       { "name": "Size", "id": "VariableCollectionId:56:268352", "modes": ["Mode 1"], "variableCount": 17 },
       { "name": "Spacing", "id": "VariableCollectionId:56:268371", "modes": ["Mode 1"], "variableCount": 8 },
       { "name": "Radius", "id": "VariableCollectionId:56:268382", "modes": ["Mode 1"], "variableCount": 8 },
       { "name": "Grid", "id": "VariableCollectionId:66:274137", "modes": ["Mode 1"], "variableCount": 2 },
-      { "name": "Semantic Colours", "id": "VariableCollectionId:2607:2", "modes": ["Light"], "variableCount": 31 }
+      { "name": "Semantic Colours", "id": "VariableCollectionId:2607:2", "modes": ["Light"], "variableCount": 36 }
     ]
   },
   "color": {
@@ -76,6 +76,18 @@
         "700": { "$value": "#A30329", "$type": "color" },
         "800": { "$value": "#83012C", "$type": "color" },
         "900": { "$value": "#6C012E", "$type": "color" }
+      },
+      "blue": {
+        "50":  { "$value": "#E7EFFC", "$type": "color" },
+        "100": { "$value": "#C2D6F8", "$type": "color" },
+        "200": { "$value": "#9DBDF4", "$type": "color" },
+        "300": { "$value": "#6794EE", "$type": "color" },
+        "400": { "$value": "#3D7BEA", "$type": "color" },
+        "500": { "$value": "#0A62E6", "$type": "color" },
+        "600": { "$value": "#0855C9", "$type": "color" },
+        "700": { "$value": "#074AAE", "$type": "color" },
+        "800": { "$value": "#053685", "$type": "color" },
+        "900": { "$value": "#02224F", "$type": "color" }
       }
     },
     "background": {
@@ -95,6 +107,13 @@
       "primary-subtle": { "$value": "{color.primary.orange.100}", "$type": "color" },
       "primary-light":  { "$value": "{color.primary.orange.50}",  "$type": "color" },
       "navy":           { "$value": "{color.background.navy-blue}", "$type": "color" }
+    },
+    "accent-blue": {
+      "default": { "$value": "{color.accent.blue.500}", "$type": "color" },
+      "hover":   { "$value": "{color.accent.blue.600}", "$type": "color" },
+      "active":  { "$value": "{color.accent.blue.700}", "$type": "color" },
+      "light":   { "$value": "{color.accent.blue.100}", "$type": "color" },
+      "subtle":  { "$value": "{color.accent.blue.50}",  "$type": "color" }
     },
     "text": {
       "default":    { "$value": "{color.secondary.neutral.900}", "$type": "color" },
