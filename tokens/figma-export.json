@@ -149,6 +149,10 @@
     },
     "interaction": {
       "hover": { "$value": "{color.secondary.neutral.100}", "$type": "color" }
+    },
+    "neutral": {
+      "active":   { "$value": "{color.secondary.neutral.700}", "$type": "color" },
+      "disabled": { "$value": "{color.secondary.neutral.100}", "$type": "color" }
     }
   },
   "size": {
