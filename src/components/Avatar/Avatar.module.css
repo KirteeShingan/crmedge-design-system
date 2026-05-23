@@ -1,0 +1,90 @@
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* ----- Sizes ----- */
+/* sm = 24px mirrors the Figma master at node 66:280918 */
+.size_sm {
+  width: var(--size-24);
+  height: var(--size-24);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.size_md {
+  width: var(--size-32);
+  height: var(--size-32);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.size_lg {
+  width: var(--size-40);
+  height: var(--size-40);
+  font-size: 18px;
+  line-height: 28px;
+}
+
+/* ----- Surfaces ----- */
+.surface_neutral {
+  background-color: var(--color-secondary-neutral-200);
+  color: var(--color-text-secondary);
+}
+
+.surface_initial {
+  background-color: var(--color-accent-green-500);
+  color: var(--color-text-inverse);
+}
+
+.surface_photo {
+  background-color: var(--color-secondary-neutral-100);
+}
+
+/* ----- Selected ring -----
+   The Figma master uses a 1px border in --color-primary-orange-100. We
+   render it as an inset box-shadow so it sits flush with the avatar edge
+   regardless of overlapping siblings in AvatarGroup. */
+.selected {
+  box-shadow: inset 0 0 0 1px var(--color-brand-primary-subtle);
+}
+
+/* ----- Photo ----- */
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ----- Initial ----- */
+.initial {
+  font-family: var(--font-family-base, "Roboto", system-ui, sans-serif);
+  font-weight: 500;
+  font-size: inherit;
+  line-height: 1;
+  letter-spacing: 0;
+  color: inherit;
+}
+
+/* ----- Person icon (logged-out) -----
+   The Figma master positions the silhouette inset 20% from the top and
+   sides, so the icon clips at the bottom of the circle. */
+.personIcon {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 20%;
+  width: 60%;
+  height: auto;
+  color: var(--color-text-secondary);
+}
