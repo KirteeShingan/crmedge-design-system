@@ -6,6 +6,7 @@ const meta: Meta<typeof Checkbox> = {
   title: "Components/Checkbox",
   component: Checkbox,
   parameters: { layout: "padded" },
+  args: { size: "md" },
   argTypes: {
     size: { control: "select", options: ["sm", "md"] },
     indeterminate: { control: "boolean" },
@@ -51,49 +52,73 @@ export const Disabled: Story = {
   args: { label: "Disabled option", disabled: true },
 };
 
-export const SmallSize: Story = {
-  args: { label: "Small checkbox", size: "sm" },
-};
-
 export const NoLabel: Story = {
   args: {},
   parameters: {
     docs: {
       description: {
         story:
-          "Box-only usage — for table cells or compact UIs. The component still renders an accessible hidden input.",
+          "Box-only  for table cells or compact UIs. The component still renders an accessible hidden input.",usage 
       },
     },
   },
 };
 
-export const AllStates: Story = {
+export const AllStatesMedium: Story = {
+  args: { size: "md" },
   parameters: { layout: "fullscreen" },
   render: () => (
     <div style={{ padding: 32, display: "grid", gap: 24 }}>
-      <Section title="Medium (default size)">
-        <Checkbox label="Off" />
-        <Checkbox label="On" defaultChecked />
-        <Checkbox label="Indeterminate" indeterminate />
+      <Section title="States">
+        <Checkbox label="Off" size="md" />
+        <Checkbox label="On" size="md" defaultChecked />
+        <Checkbox label="Indeterminate" size="md" indeterminate />
       </Section>
-      <Section title="Small">
+      <Section title="Disabled">
+        <Checkbox label="Off" size="md" disabled />
+        <Checkbox label="On" size="md" disabled defaultChecked />
+        <Checkbox label="Indeterminate" size="md" disabled indeterminate />
+      </Section>
+      <Section title="Error">
+        <Checkbox label="Off" size="md" error="Required field" />
+        <Checkbox label="On" size="md" defaultChecked error="Invalid choice" />
+        <Checkbox label="Indeterminate" size="md" indeterminate error="Mixed state" />
+      </Section>
+      <Section title="With helper text">
+        <Checkbox
+          label="Marketing emails"
+          size="md"
+          helper="Tips, product updates, and the occasional announcement."
+        />
+      </Section>
+    </div>
+  ),
+};
+
+export const AllStatesSmall: Story = {
+  args: { size: "sm" },
+  parameters: { layout: "fullscreen" },
+  render: () => (
+    <div style={{ padding: 32, display: "grid", gap: 24 }}>
+      <Section title="States">
         <Checkbox label="Off" size="sm" />
         <Checkbox label="On" size="sm" defaultChecked />
         <Checkbox label="Indeterminate" size="sm" indeterminate />
       </Section>
       <Section title="Disabled">
-        <Checkbox label="Off" disabled />
-        <Checkbox label="On" disabled defaultChecked />
-        <Checkbox label="Indeterminate" disabled indeterminate />
+        <Checkbox label="Off" size="sm" disabled />
+        <Checkbox label="On" size="sm" disabled defaultChecked />
+        <Checkbox label="Indeterminate" size="sm" disabled indeterminate />
       </Section>
       <Section title="Error">
-        <Checkbox label="Off" error="Required field" />
-        <Checkbox label="On" defaultChecked error="Invalid choice" />
-        <Checkbox label="Indeterminate" indeterminate error="Mixed state" />
+        <Checkbox label="Off" size="sm" error="Required field" />
+        <Checkbox label="On" size="sm" defaultChecked error="Invalid choice" />
+        <Checkbox label="Indeterminate" size="sm" indeterminate error="Mixed state" />
       </Section>
       <Section title="With helper text">
         <Checkbox
           label="Marketing emails"
+          size="sm"
           helper="Tips, product updates, and the occasional announcement."
         />
       </Section>
@@ -133,7 +158,7 @@ export const SelectAll: Story = {
     docs: {
       description: {
         story:
-          "Tri-state parent: the 'Select all' checkbox derives its state from its children — checked when all are checked, indeterminate when some are checked, unchecked otherwise. Clicking it toggles all children together.",
+          "Tri-state parent: the 'Select all' checkbox derives its state from its  checked when all are checked, indeterminate when some are checked, unchecked otherwise. Clicking it toggles all children together.",children 
       },
     },
   },
