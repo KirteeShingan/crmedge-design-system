@@ -22,5 +22,5 @@ export type { CheckboxProps, CheckboxSize } from "./components/Checkbox";
 export { StatusBadge } from "./components/StatusBadge";
 export type {
   StatusBadgeProps,
-  StatusBadgeStatus,
+  StatusBadgeColor,
 } from "./components/StatusBadge";
