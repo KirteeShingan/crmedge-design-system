@@ -29,6 +29,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
+  "dependencies": {
+    "@floating-ui/react": "^0.27.19"
+  },
   "devDependencies": {
     "@figma/code-connect": "^1.4.4",
     "@storybook/addon-essentials": "^8.6.14",

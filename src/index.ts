@@ -27,3 +27,13 @@ export type {
 
 export { Search } from "./components/Search";
 export type { SearchProps, SearchSize } from "./components/Search";
+
+export { Tooltip, TooltipTrigger } from "./components/Tooltip";
+export type {
+  TooltipProps,
+  TooltipVariant,
+  TooltipPlacement,
+  TooltipAction,
+  TooltipTriggerProps,
+  TooltipTriggerEvent,
+} from "./components/Tooltip";
