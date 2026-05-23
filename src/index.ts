@@ -18,3 +18,6 @@ export type {
 
 export { Checkbox } from "./components/Checkbox";
 export type { CheckboxProps, CheckboxSize } from "./components/Checkbox";
+
+export { Divider } from "./components/Divider";
+export type { DividerProps, DividerOrientation } from "./components/Divider";
