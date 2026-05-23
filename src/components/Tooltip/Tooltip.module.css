@@ -1,0 +1,244 @@
+/* Tooltip — presentational. Two variants (rich/plain) × 13 placements. */
+
+.root {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* horizontal arrow placements need extra space to host the arrow outside the body */
+  isolation: isolate;
+}
+
+/* ---------- Bodies ---------- */
+
+.body {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.rich {
+  background: var(--color-background-white);
+  border-radius: 6px; /* Figma uses 6px — not a defined radius token; flagged for reverse-feed */
+  box-shadow: 0 1px 4px rgba(25, 27, 35, 0.1);
+  padding: 16px;
+  gap: 16px;
+  width: 350px;
+  max-width: 100%;
+  align-items: flex-start;
+}
+
+.plain {
+  background: var(--color-secondary-neutral-900);
+  border-radius: var(--radius-xxs); /* 4px */
+  padding: 16px;
+  gap: 16px;
+  align-items: center;
+}
+
+/* ---------- Rich tooltip content ---------- */
+
+.textBlock {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.heading {
+  margin: 0;
+  font-family: "Gilroy", "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-text-default);
+}
+
+.bodyTextRich {
+  margin: 0;
+  font-family: "Gilroy", "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-secondary-neutral-600);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--radius-xs); /* 8px */
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-default);
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.actionButton:hover {
+  background: var(--color-secondary-neutral-50);
+}
+
+.actionButton:focus-visible {
+  outline: 2px solid var(--color-primary-orange-500);
+  outline-offset: 2px;
+}
+
+.actionPrimary {
+  background: var(--color-neutral-disabled); /* #eff0f3 — matches Figma */
+}
+
+.actionPrimary:hover {
+  background: var(--color-secondary-neutral-200);
+}
+
+.closeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-text-default);
+  cursor: pointer;
+  padding: 0;
+}
+
+.closeButton:hover {
+  background: var(--color-secondary-neutral-50);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--color-primary-orange-500);
+  outline-offset: 1px;
+}
+
+/* ---------- Plain tooltip content ---------- */
+
+.plainText {
+  margin: 0;
+  font-family: "Gilroy", "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-secondary-neutral-100);
+  white-space: nowrap;
+}
+
+.closeButtonPlain {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-secondary-neutral-100);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.closeButtonPlain:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.closeButtonPlain:focus-visible {
+  outline: 2px solid var(--color-primary-orange-500);
+  outline-offset: 1px;
+}
+
+/* ---------- Arrow ---------- */
+
+.arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  /* color is set per variant via currentColor */
+}
+
+.arrowPlain {
+  color: var(--color-secondary-neutral-900);
+}
+
+.arrowRich {
+  color: var(--color-background-white);
+  filter: drop-shadow(0 1px 1px rgba(25, 27, 35, 0.06));
+}
+
+/* Arrow placements — 8px tall × 16px wide triangle pointing outward */
+
+/* Top edges (arrow above body, pointing up) */
+.placement_top .arrow,
+.placement_top_start .arrow,
+.placement_top_end .arrow {
+  top: -8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid currentColor;
+}
+.placement_top .arrow { left: 50%; transform: translateX(-50%); }
+.placement_top_start .arrow { left: 16px; }
+.placement_top_end .arrow { right: 16px; }
+
+/* Bottom edges (arrow below body, pointing down) */
+.placement_bottom .arrow,
+.placement_bottom_start .arrow,
+.placement_bottom_end .arrow {
+  bottom: -8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid currentColor;
+}
+.placement_bottom .arrow { left: 50%; transform: translateX(-50%); }
+.placement_bottom_start .arrow { left: 16px; }
+.placement_bottom_end .arrow { right: 16px; }
+
+/* Left edges (arrow on left of body, pointing left) */
+.placement_left .arrow,
+.placement_left_start .arrow,
+.placement_left_end .arrow {
+  left: -8px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid currentColor;
+}
+.placement_left .arrow { top: 50%; transform: translateY(-50%); }
+.placement_left_start .arrow { top: 16px; }
+.placement_left_end .arrow { bottom: 16px; }
+
+/* Right edges (arrow on right of body, pointing right) */
+.placement_right .arrow,
+.placement_right_start .arrow,
+.placement_right_end .arrow {
+  right: -8px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid currentColor;
+}
+.placement_right .arrow { top: 50%; transform: translateY(-50%); }
+.placement_right_start .arrow { top: 16px; }
+.placement_right_end .arrow { bottom: 16px; }
