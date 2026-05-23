@@ -73,7 +73,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             required={required}
             aria-invalid={hasError || undefined}
             aria-describedby={describedBy}
-            className={styles.input}
+            className={styles.nativeInput}
           />
           <span
             className={cx(styles.box, styles[`size_${size}`])}
