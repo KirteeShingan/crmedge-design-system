@@ -147,6 +147,14 @@
   gap: var(--spacing-xxs);
 }
 
+.size_md ~ .text {
+  padding-top: 2px;
+}
+
+.size_sm ~ .text {
+  padding-top: 0;
+}
+
 .label {
   font-size: 14px;
   font-weight: 500;
