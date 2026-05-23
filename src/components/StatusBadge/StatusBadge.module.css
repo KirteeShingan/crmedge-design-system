@@ -1,0 +1,80 @@
+/* StatusBadge — pill-shaped indicator.
+ * Mirrors Chip / Small / Info variant from Figma node 53:259540.
+ * Geometry: padding 2px 6px, gap 2px, radius 20px, font 12px Inter Medium.
+ *
+ * Token strategy: bg + text/icon both bind to PRIMITIVE accent (or neutral)
+ * tokens. Each color uses its ramp's 50 shade for bg and 900 shade for
+ * text/icon, per the user-confirmed spec on 2026-05-23. Icons inherit
+ * the text color via `currentColor` so they always track the same token.
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px 6px;
+  border-radius: 20px;
+  font-family: var(--font-family-base);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  user-select: none;
+}
+
+.label {
+  display: inline-block;
+}
+
+.iconSlot {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  /* Icons inherit the badge text color so callers can pass any SVG
+   * using `currentColor` for stroke/fill. */
+  color: inherit;
+}
+
+.iconSlot > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---- Neutral ----
+ * Figma: bg secondary-neutral-50 (#f7f8fc), text/icon secondary-neutral-900 (#131417).
+ */
+.color_neutral {
+  background-color: var(--color-secondary-neutral-50);
+  color: var(--color-secondary-neutral-900);
+}
+
+/* ---- Yellow ----
+ * Figma: bg accent-yellow-50 (#fefae6), text/icon accent-yellow-900 (#794f0b).
+ */
+.color_yellow {
+  background-color: var(--color-accent-yellow-50);
+  color: var(--color-accent-yellow-900);
+}
+
+/* ---- Blue ----
+ * Figma: bg accent-blue-50 (#e7effc), text/icon accent-blue-900 (#02224f).
+ */
+.color_blue {
+  background-color: var(--color-accent-blue-50);
+  color: var(--color-accent-blue-900);
+}
+
+/* ---- Green ----
+ * Figma: bg accent-green-50 (#ebf9ef), text/icon accent-green-900 (#003a40).
+ */
+.color_green {
+  background-color: var(--color-accent-green-50);
+  color: var(--color-accent-green-900);
+}
