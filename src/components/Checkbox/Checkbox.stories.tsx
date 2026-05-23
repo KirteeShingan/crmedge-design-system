@@ -58,7 +58,7 @@ export const NoLabel: Story = {
     docs: {
       description: {
         story:
-          "Box-only  for table cells or compact UIs. The component still renders an accessible hidden input.",usage 
+          "Box-only usage for table cells or compact UIs. The component still renders an accessible hidden input.",
       },
     },
   },
@@ -158,7 +158,7 @@ export const SelectAll: Story = {
     docs: {
       description: {
         story:
-          "Tri-state parent: the 'Select all' checkbox derives its state from its  checked when all are checked, indeterminate when some are checked, unchecked otherwise. Clicking it toggles all children together.",children 
+          "Tri-state parent: the 'Select all' checkbox derives its state from its children — checked when all are checked, indeterminate when some are checked, unchecked otherwise. Clicking it toggles all children together.",
       },
     },
   },
