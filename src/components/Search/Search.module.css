@@ -1,0 +1,162 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  width: 200px;
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xs);
+  font-family: "Gilroy", "Inter", system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  color: var(--color-secondary-neutral-900);
+  transition: border-color 120ms ease, background-color 120ms ease;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Size: Medium — 48px tall, 12px padding all sides */
+.size_md {
+  padding: var(--spacing-s);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Size: Small — 36px tall, 8px py, 8px pl, 12px pr (rebalanced when no trailing icon present) */
+.size_sm {
+  padding: var(--spacing-xs) var(--spacing-s) var(--spacing-xs) var(--spacing-xs);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* When the clear button is visible, restore symmetric padding on small */
+.size_sm.hasClear {
+  padding: var(--spacing-xs);
+}
+
+/* Focused → Active in Figma: 2px dark border, white background.
+   Compensate the extra border pixel so dimensions don't jump. */
+.root:focus-within:not(.disabled) {
+  border: 2px solid var(--color-neutral-active);
+  background: var(--color-background-white);
+}
+
+.size_md:focus-within:not(.disabled) {
+  padding: calc(var(--spacing-s) - 1px);
+}
+
+.size_sm:focus-within:not(.disabled) {
+  padding: calc(var(--spacing-xs) - 1px) calc(var(--spacing-s) - 1px)
+    calc(var(--spacing-xs) - 1px) calc(var(--spacing-xs) - 1px);
+}
+
+.size_sm.hasClear:focus-within:not(.disabled) {
+  padding: calc(var(--spacing-xs) - 1px);
+}
+
+/* Filled but not focused: white background still applies */
+.filled:not(:focus-within):not(.disabled) {
+  background: var(--color-background-white);
+}
+
+/* Disabled */
+.disabled {
+  background: var(--color-neutral-disabled);
+  cursor: not-allowed;
+}
+
+.disabled .input {
+  cursor: not-allowed;
+  color: var(--color-text-disabled);
+}
+
+.disabled .input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.disabled .leadingIcon {
+  color: var(--color-text-disabled);
+}
+
+/* Leading search icon */
+.leadingIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-secondary-neutral-600);
+}
+
+.leadingIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Input */
+.input {
+  flex: 1 1 0;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+}
+
+.input::placeholder {
+  color: var(--color-secondary-neutral-600);
+  opacity: 1;
+}
+
+.input::-webkit-search-cancel-button,
+.input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Clear button */
+.clearButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-secondary-neutral-600);
+  border-radius: var(--radius-xxs);
+}
+
+.size_md .clearButton {
+  width: 24px;
+  height: 24px;
+}
+
+.size_sm .clearButton {
+  width: 20px;
+  height: 20px;
+}
+
+.clearButton svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.clearButton:hover {
+  color: var(--color-secondary-neutral-900);
+}
+
+.clearButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 1px;
+}

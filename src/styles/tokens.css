@@ -122,6 +122,8 @@
   --color-status-error-subtle: var(--color-accent-red-50);
   --color-status-error-text: var(--color-accent-red-700);
   --color-interaction-hover: var(--color-secondary-neutral-100);
+  --color-neutral-active: var(--color-secondary-neutral-700);
+  --color-neutral-disabled: var(--color-secondary-neutral-100);
   --spacing-xxs: var(--size-4);
   --spacing-xs: var(--size-8);
   --spacing-s: var(--size-12);

@@ -24,3 +24,6 @@ export type {
   StatusBadgeProps,
   StatusBadgeColor,
 } from "./components/StatusBadge";
+
+export { Search } from "./components/Search";
+export type { SearchProps, SearchSize } from "./components/Search";
