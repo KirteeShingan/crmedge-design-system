@@ -1,9 +1,12 @@
 /* StatusBadge — pill-shaped status indicator.
  * Mirrors Chip / Small / Info variant from Figma node 53:259540.
  * Geometry: padding 2px 6px, gap 2px, radius 20px, font 12px Inter Medium.
- * Text colors use the 600 primitives (green-600 / yellow-600) and the brand
- * primary directly — these match Figma's status text colors exactly, while
- * the semantic `--color-status-*-text` tokens currently alias the 700 shade.
+ *
+ * Token strategy: bg + text colors both bind to PRIMITIVE accent tokens to
+ * match Figma's variable tree exactly. Figma's Chip master uses
+ * `accent/green/50` + `accent/green/600` (etc.) directly, not the
+ * `status-success-*` semantic aliases — those alias different shades (700)
+ * and would diverge. Icons inherit text color via `currentColor`.
  */
 
 .root {
@@ -33,22 +36,31 @@
   width: 16px;
   height: 16px;
   display: inline-block;
+  /* Inherits color from .root so icon and text always match. */
+  color: inherit;
 }
 
-/* ---- Published (success / green) ---- */
+/* ---- Published (green) ----
+ * Figma: bg `accent/green/50` (#ebf9ef), text `accent/green/600` (#00745d).
+ */
 .status_published {
-  background-color: var(--color-status-success-subtle);
+  background-color: var(--color-accent-green-50);
   color: var(--color-accent-green-600);
 }
 
-/* ---- Scheduled (warning / yellow) ---- */
+/* ---- Scheduled (yellow) ----
+ * Figma: bg `accent/yellow/50` (#fefae6), text `accent/yellow/600` (#daa52b).
+ */
 .status_scheduled {
-  background-color: var(--color-status-warning-subtle);
+  background-color: var(--color-accent-yellow-50);
   color: var(--color-accent-yellow-600);
 }
 
-/* ---- Draft (brand primary / orange) ---- */
+/* ---- Draft (orange / brand) ----
+ * Figma: bg `primary/orange/50` (#fff4f0 legacy / #fffcf0 post-migration),
+ * text `primary/orange/500` (#f05424).
+ */
 .status_draft {
-  background-color: var(--color-brand-primary-light);
-  color: var(--color-brand-primary);
+  background-color: var(--color-primary-orange-50);
+  color: var(--color-primary-orange-500);
 }
