@@ -8,6 +8,8 @@ export {
   TableRow,
   TableHeaderCell,
   TableCell,
+  TableSelectionCell,
+  TwoLineCell,
 } from "./Table";
 export type {
   TableContainerProps,
@@ -22,4 +24,8 @@ export type {
   TableCellType,
   TableCellAlign,
   TableDensity,
+  TableSortDirection,
+  TableSelectionCellProps,
+  TwoLineCellProps,
+  TwoLineSubtitleVariant,
 } from "./Table";
