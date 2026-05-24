@@ -83,10 +83,10 @@ const Cell = ({
   </div>
 );
 
-/* ---------- Figma matrix: State × LoggedIn × Photo ----------
-   Mirrors the 8 variants of the Figma master at node 66:280918. */
+/* ---------- All states: State × LoggedIn × Photo ----------
+   Covers the 8 combinations of the Figma master at node 66:280918. */
 
-export const FigmaMatrix: Story = {
+export const AllStates: Story = {
   parameters: { layout: "fullscreen" },
   render: () => (
     <div style={sectionStyle}>
