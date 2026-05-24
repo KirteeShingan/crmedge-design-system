@@ -56,7 +56,7 @@
   border-collapse: collapse;
   font-family: var(--font-family-base);
   color: var(--color-text-default);
-  background-color: var(--color-background-page);
+  background-color: var(--color-background-white);
 }
 
 .density_sm {
@@ -94,13 +94,13 @@
  * into sticky positioning at the top of the scroll context. The opaque
  * background is required so body rows don't show through as they scroll
  * underneath. z-index keeps it above body content. Background matches
- * the .headRow chrome below (`--color-background-page`). */
+ * the .headRow chrome below (`--color-background-white`). */
 .table_stickyHeader thead th,
 .container_stickyHeader thead th {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: var(--color-background-page);
+  background-color: var(--color-background-white);
 }
 
 /* ---------- row (body) ---------- */
@@ -113,19 +113,12 @@
   transition: background-color 120ms ease;
 }
 
-.row:hover:not(.row_disabled) {
-  background-color: var(--color-interaction-hover);
+.row:hover:not(.row_disabled):not(.row_selected) {
+  background-color: var(--color-secondary-neutral-50);
 }
 
 .row_selected {
-  /* TODO: bind to `--color-interaction-selected` once that semantic
-   * token flows through the Figma → tokens pipeline. The Figma file uses
-   * `Neutral/Subtle` for this state but it isn't exported to CSS yet. */
-  background-color: var(--color-primary-orange-50);
-}
-
-.row_selected:hover:not(.row_disabled) {
-  background-color: var(--color-primary-orange-100);
+  background-color: var(--color-neutral-subtle);
 }
 
 .row_disabled {
@@ -135,9 +128,7 @@
 
 /* ---------- row (header) ---------- */
 .headRow {
-  /* Header chrome = Background/Page (semantic alias of white). Sticky-th
-   * background matches so headers stay consistent whether pinned or not. */
-  background-color: var(--color-background-page);
+  background-color: var(--color-background-white);
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
