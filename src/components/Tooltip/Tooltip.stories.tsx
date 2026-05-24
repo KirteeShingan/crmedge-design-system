@@ -80,7 +80,7 @@ export const RichTooltip: Story = {
  *
  * Controls panel is disabled — this is a fixed showcase, not args-driven.
  */
-export const AllPlacements: Story = {
+export const AllStates: Story = {
   parameters: {
     layout: "fullscreen",
     controls: { disable: true },
