@@ -1,8 +1,14 @@
 /*
- * Button — strict 1:1 mapping to Figma master 46:223361 (CRM-DS V1.0).
- * Properties: Type (primary/secondary/tertiary) × Height (medium/small) × State.
+ * Button — mapping to Figma master 46:223361 (CRM-DS V1.0).
+ * Properties: Type (primary/secondary/tertiary/link/neutral) × Height (medium/small) × State.
  * Figma merges Hover and Pressed into one visual; :hover and :active share rules.
  * Disabled = opacity 0.5 on the enabled style (no separate disabled tokens).
+ *
+ * Two divergences from Figma flagged for reverse-feed:
+ *  - Link Enabled/Disabled fill in Figma is a raw #3655f2 (not in the palette);
+ *    code uses transparent, which is the conventional link-button background.
+ *  - Neutral Hover in Figma is identical to Enabled (no visible hover); code
+ *    darkens one step to Secondary/Neutral/200 so the affordance is visible.
  */
 
 .button {
@@ -97,6 +103,32 @@
 .variant_tertiary:active:not(:disabled) {
   background-color: var(--color-interaction-hover);
   color: var(--color-brand-primary-hover);
+}
+
+/* ----- Type: Link (underlined text) ----- */
+.variant_link {
+  background-color: transparent;
+  color: var(--color-accent-blue-default);
+  border-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.variant_link:hover:not(:disabled),
+.variant_link:active:not(:disabled) {
+  background-color: var(--color-interaction-hover);
+  color: var(--color-accent-blue-hover);
+}
+
+/* ----- Type: Neutral (subtle filled) ----- */
+.variant_neutral {
+  background-color: var(--color-neutral-subtle);
+  color: var(--color-text-default);
+  border-color: var(--color-neutral-subtle);
+}
+.variant_neutral:hover:not(:disabled),
+.variant_neutral:active:not(:disabled) {
+  background-color: var(--color-secondary-neutral-200);
+  border-color: var(--color-secondary-neutral-200);
 }
 
 @media (prefers-reduced-motion: reduce) {

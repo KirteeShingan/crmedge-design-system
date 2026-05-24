@@ -3,7 +3,13 @@ import type { CSSProperties, ReactNode } from "react";
 import { Button } from "./Button";
 import type { ButtonSize, ButtonVariant } from "./Button";
 
-const VARIANTS: ButtonVariant[] = ["primary", "secondary", "tertiary"];
+const VARIANTS: ButtonVariant[] = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "link",
+  "neutral",
+];
 const SIZES: ButtonSize[] = ["small", "medium"];
 
 const PlusIcon = () => (
