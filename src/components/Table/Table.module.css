@@ -170,6 +170,58 @@
   text-align: start;
 }
 
+/* ---------- sortable header cell ----------
+ * When `sortable` is true on TableHeaderCell, the children are wrapped in
+ * an inner `<button>` so screen readers + keyboards get proper semantics
+ * (button role, focusable, Enter/Space activate). The cell sets
+ * `aria-sort` to "ascending" | "descending" | "none". Mirrors the Figma
+ * `Sort` axis on `Table / HeaderCell` (set 2720:136). */
+.headerCell_sortable {
+  padding: 0;
+}
+
+.sortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: var(--table-header-padding-y) var(--table-header-padding-x);
+  background: none;
+  border: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.sortButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: -2px;
+}
+
+.sortLabel {
+  /* Header text behaves like the non-sortable case — no shrink, no wrap. */
+  white-space: nowrap;
+}
+
+.sortIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-default);
+}
+
+.sortIcon_inactive {
+  /* Sortable but currently unsorted — muted so the active asc/desc state
+   * reads clearly when chosen. Matches the Sortable variant in Figma. */
+  color: var(--color-text-secondary);
+  opacity: 0.5;
+}
+
 /* ---------- alignment (shared by cell + header cell) ---------- */
 .align_start   { text-align: start; }
 .align_center  { text-align: center; }

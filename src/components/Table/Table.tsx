@@ -266,29 +266,132 @@ export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
 
 /* ---------- TableHeaderCell ---------- */
 
+export type TableSortDirection = "none" | "ascending" | "descending";
+
 export interface TableHeaderCellProps
-  extends Omit<ThHTMLAttributes<HTMLTableCellElement>, "align"> {
+  extends Omit<ThHTMLAttributes<HTMLTableCellElement>, "align" | "onClick"> {
   /**
    * Horizontal alignment. Defaults to `start`. `numeric` is sugar for
    * `end` with `font-variant-numeric: tabular-nums`. (Shadows the
    * deprecated HTML `align` attribute.)
    */
   align?: TableCellAlign;
+  /**
+   * Whether this column supports sorting. When true, the cell wraps its
+   * children in a `<button>` and renders a sort-direction indicator.
+   * Mirrors the Figma `Sort` axis on `Table / HeaderCell` (component set
+   * `2720:136`).
+   */
+  sortable?: boolean;
+  /**
+   * Current sort state of this column. Drives the indicator icon and the
+   * `aria-sort` attribute on the `<th>`. Ignored when `sortable` is false.
+   * Defaults to `"none"`.
+   */
+  sortDirection?: TableSortDirection;
+  /**
+   * Click handler fired when the user activates the sort button (click,
+   * Enter, or Space). Consumers cycle through `none → asc → desc → none`
+   * (or whatever progression suits their data) and pass back a new
+   * `sortDirection` on the next render.
+   */
+  onSort?: () => void;
 }
+
+const SortIndicatorIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M 8 2 L 12 7 L 4 7 Z M 4 9 L 12 9 L 8 14 Z" />
+  </svg>
+);
+
+const SortAscendingIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M 8 4 L 13 12 L 3 12 Z" />
+  </svg>
+);
+
+const SortDescendingIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M 3 4 L 13 4 L 8 12 Z" />
+  </svg>
+);
 
 export const TableHeaderCell = forwardRef<
   HTMLTableCellElement,
   TableHeaderCellProps
 >(function TableHeaderCell(props, ref) {
-  const { align = "start", className, children, scope, ...rest } = props;
+  const {
+    align = "start",
+    sortable,
+    sortDirection = "none",
+    onSort,
+    className,
+    children,
+    scope,
+    ...rest
+  } = props;
+
+  const ariaSort = sortable ? sortDirection : undefined;
+
   return (
     <th
       {...rest}
       ref={ref}
       scope={scope ?? "col"}
-      className={cx(styles.headerCell, styles[`align_${align}`], className)}
+      aria-sort={ariaSort}
+      className={cx(
+        styles.headerCell,
+        styles[`align_${align}`],
+        sortable && styles.headerCell_sortable,
+        className,
+      )}
     >
-      {children}
+      {sortable ? (
+        <button
+          type="button"
+          onClick={onSort}
+          className={styles.sortButton}
+        >
+          <span className={styles.sortLabel}>{children}</span>
+          <span
+            className={cx(
+              styles.sortIcon,
+              sortDirection === "none" && styles.sortIcon_inactive,
+            )}
+          >
+            {sortDirection === "ascending" ? (
+              <SortAscendingIcon />
+            ) : sortDirection === "descending" ? (
+              <SortDescendingIcon />
+            ) : (
+              <SortIndicatorIcon />
+            )}
+          </span>
+        </button>
+      ) : (
+        children
+      )}
     </th>
   );
 });
