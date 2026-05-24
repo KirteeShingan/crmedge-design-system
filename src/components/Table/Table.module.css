@@ -1,0 +1,189 @@
+/* Table — compound primitive.
+ * Mirrors the Figma component set `Table / Cell` (Type: Text | Badge | Date | Buttons),
+ * `Table / HeaderCell`, and `Table / Row` (Type × State) on the
+ * 🗄️ Table (Fixed) page of file DmL4gv3m10KzL2Y6yLMDJ5.
+ *
+ * Compound model:
+ *   <TableContainer>            → <div>  scroll context, optional maxHeight/maxWidth
+ *     <Table density stickyHeader>  → <table>
+ *       <TableColGroup>         → <colgroup>
+ *         <TableCol width>      → <col>
+ *       <TableHead>             → <thead>
+ *         <TableRow header><TableHeaderCell></TableRow>
+ *       <TableBody>             → <tbody>
+ *         <TableRow selected?><TableCell type align></TableRow>
+ *
+ * Density is driven by CSS custom properties on the Table root; each
+ * density level overrides paddingY + paddingX for cells and header cells,
+ * and buttons cells stay 2px tighter at every density.
+ *
+ * Sticky header places `position: sticky; top: 0` on every descendant
+ * <th>. Meaningful when wrapped in TableContainer with `maxHeight` (sticks
+ * inside the scroll context) or in the viewport (sticks to viewport top).
+ */
+
+/* ---------- container ---------- */
+.container {
+  position: relative;
+  /* Stack so children participate in the same flow + we get a defined
+   * containing block for any future absolute positioning. */
+  display: block;
+}
+
+.container_scrollY {
+  overflow-y: auto;
+  /* Bitmap edges look cleaner with this on macOS WebKit. */
+  -webkit-overflow-scrolling: touch;
+}
+
+.container_scrollX {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- root ---------- */
+.table {
+  /* Density-controlled padding tokens. Defaults are `md`. Each density
+   * class overrides these on the Table root and the values cascade to
+   * descendant cells via var() lookups. */
+  --table-cell-padding-y: 12px;
+  --table-cell-padding-x: 16px;
+  --table-header-padding-y: 8px;
+  --table-header-padding-x: 16px;
+  --table-buttons-padding-y: 10px;
+
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-base);
+  color: var(--color-text-default);
+  background-color: var(--color-background-page);
+}
+
+.density_sm {
+  --table-cell-padding-y: 6px;
+  --table-cell-padding-x: 12px;
+  --table-header-padding-y: 4px;
+  --table-header-padding-x: 12px;
+  --table-buttons-padding-y: 4px;
+}
+
+.density_md {
+  /* Defaults — declared explicitly so the class can be applied even if
+   * the root vars are overridden by a parent. */
+  --table-cell-padding-y: 12px;
+  --table-cell-padding-x: 16px;
+  --table-header-padding-y: 8px;
+  --table-header-padding-x: 16px;
+  --table-buttons-padding-y: 10px;
+}
+
+.density_lg {
+  --table-cell-padding-y: 16px;
+  --table-cell-padding-x: 20px;
+  --table-header-padding-y: 12px;
+  --table-header-padding-x: 20px;
+  --table-buttons-padding-y: 14px;
+}
+
+/* thead / tbody — structural */
+.head {}
+.body {}
+
+/* ---------- sticky header ----------
+ * `stickyHeader` on Table (or Container) puts every descendant <th>
+ * into sticky positioning at the top of the scroll context. The opaque
+ * background is required so body rows don't show through as they scroll
+ * underneath. z-index keeps it above body content. */
+.table_stickyHeader thead th,
+.container_stickyHeader thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--color-background-surface);
+}
+
+/* ---------- row (body) ---------- */
+.row {
+  background-color: var(--color-background-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: background-color 120ms ease;
+}
+
+.row:hover:not(.row_disabled) {
+  background-color: var(--color-interaction-hover);
+}
+
+.row_selected {
+  /* TODO: bind to `--color-interaction-selected` once that semantic
+   * token flows through the Figma → tokens pipeline. The Figma file uses
+   * `Neutral/Subtle` for this state but it isn't exported to CSS yet. */
+  background-color: var(--color-primary-orange-50);
+}
+
+.row_selected:hover:not(.row_disabled) {
+  background-color: var(--color-primary-orange-100);
+}
+
+.row_disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---------- row (header) ---------- */
+.headRow {
+  background-color: var(--color-background-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* ---------- cell (body) ---------- */
+.cell {
+  padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
+  font-family: var(--font-family-base);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-default);
+  vertical-align: middle;
+}
+
+/* Cell type variants — currently differ only on vertical padding.
+ * The `type` prop is intentionally a semantic intent signal; consumers
+ * still compose arbitrary children inside any type. */
+.cell_text {}
+.cell_badge {}
+.cell_date {}
+.cell_buttons {
+  /* Tighter vertical padding so 24h Buttons / IconButtons fit cleanly
+   * without overflowing the row. Tracked separately from base cell
+   * paddingY so density can scale both independently. */
+  padding-top: var(--table-buttons-padding-y);
+  padding-bottom: var(--table-buttons-padding-y);
+}
+
+/* ---------- header cell ---------- */
+.headerCell {
+  padding: var(--table-header-padding-y) var(--table-header-padding-x);
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: start;
+}
+
+/* ---------- alignment (shared by cell + header cell) ---------- */
+.align_start   { text-align: start; }
+.align_center  { text-align: center; }
+.align_end     { text-align: end; }
+.align_numeric {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* When a cell carries a buttons-style cluster or any flex layout in
+ * children, align ↔ flex justify. `align_*` only governs text-align,
+ * so consumers placing flex children inside a cell should pass an
+ * align that matches their flex justify-content. The two are independent
+ * by design — this keeps the cell from imposing flex on arbitrary children. */

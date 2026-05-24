@@ -1,0 +1,25 @@
+export {
+  TableContainer,
+  Table,
+  TableColGroup,
+  TableCol,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeaderCell,
+  TableCell,
+} from "./Table";
+export type {
+  TableContainerProps,
+  TableProps,
+  TableColGroupProps,
+  TableColProps,
+  TableHeadProps,
+  TableBodyProps,
+  TableRowProps,
+  TableHeaderCellProps,
+  TableCellProps,
+  TableCellType,
+  TableCellAlign,
+  TableDensity,
+} from "./Table";
