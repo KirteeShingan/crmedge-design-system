@@ -10,6 +10,8 @@ export {
   TableCell,
   TableSelectionCell,
   TwoLineCell,
+  TableEmpty,
+  TableSkeleton,
 } from "./Table";
 export type {
   TableContainerProps,
@@ -28,4 +30,6 @@ export type {
   TableSelectionCellProps,
   TwoLineCellProps,
   TwoLineSubtitleVariant,
+  TableEmptyProps,
+  TableSkeletonProps,
 } from "./Table";

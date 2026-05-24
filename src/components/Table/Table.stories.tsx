@@ -11,10 +11,12 @@ import {
   TableCol,
   TableColGroup,
   TableContainer,
+  TableEmpty,
   TableHead,
   TableHeaderCell,
   TableRow,
   TableSelectionCell,
+  TableSkeleton,
   TwoLineCell,
 } from "./Table";
 
@@ -862,4 +864,186 @@ export const TwoLineContent: Story = {
       </TableBody>
     </Table>
   ),
+};
+
+/* ---------- 13 — Empty ---------- */
+/**
+ * Empty-state row using `<TableEmpty>`. Illustration + title + description
+ * + dual action buttons (Neutral primary + Tertiary secondary), matching
+ * the Figma `Table / Empty` master.
+ */
+const EmptyIllustration = () => (
+  <svg
+    width="120"
+    height="80"
+    viewBox="0 0 120 80"
+    fill="none"
+    aria-hidden="true"
+  >
+    <rect
+      x="0.5"
+      y="0.5"
+      width="119"
+      height="79"
+      rx="7.5"
+      stroke="var(--color-border-subtle)"
+      fill="var(--color-background-white)"
+    />
+    <circle cx="86" cy="22" r="8" fill="var(--color-secondary-neutral-200)" />
+    <path
+      d="M 14 64 L 42 36 L 60 52 L 78 38 L 106 64 Z"
+      fill="var(--color-secondary-neutral-200)"
+    />
+  </svg>
+);
+export const Empty: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Drop `<TableEmpty>` inside `<TableBody>` when there are no rows. Pass any ReactNode as `illustration`. The `action` slot accepts one or more buttons — the Figma master uses a Neutral primary + Tertiary secondary pair. Mirrors `Table / Empty` 2730:142.",
+      },
+    },
+  },
+  render: () => (
+    <Table>
+      <TableHead>
+        <TableRow header>
+          <TableHeaderCell>Title</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+          <TableHeaderCell>Owner</TableHeaderCell>
+          <TableHeaderCell>Updated</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableEmpty
+          colSpan={4}
+          illustration={<EmptyIllustration />}
+          title="No content yet"
+          description="Get started by creating your first piece of content."
+          action={
+            <>
+              <Button variant="neutral">Browse templates</Button>
+              <Button variant="tertiary">Learn more</Button>
+            </>
+          }
+        />
+      </TableBody>
+    </Table>
+  ),
+};
+
+/* ---------- 14 — Skeleton ---------- */
+/**
+ * Loading placeholder using `<TableSkeleton>`. Renders `rows × columns`
+ * pulsing bars inside the body. Defaults: 5 rows × 4 columns. Respects
+ * `prefers-reduced-motion`.
+ */
+export const Skeleton: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`<TableSkeleton>` returns a fragment of `<tr>` rows that slot directly inside a `<TableBody>`. Pulse-opacity animation indicates loading without aggressive motion; falls back to a static dim bar under `prefers-reduced-motion: reduce`. Mirrors `Table / Skeleton` 2733:148.",
+      },
+    },
+  },
+  render: () => (
+    <Table>
+      <TableHead>
+        <TableRow header>
+          <TableHeaderCell>Title</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+          <TableHeaderCell>Owner</TableHeaderCell>
+          <TableHeaderCell>Updated</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableSkeleton rows={5} columns={4} />
+      </TableBody>
+    </Table>
+  ),
+};
+
+/* ---------- 15 — LoadingToEmptyToData (combined) ---------- */
+/**
+ * Three lifecycle states stacked: loading (skeleton) → empty → loaded.
+ * Demonstrates how the same `<TableBody>` slot accepts each helper
+ * conditionally based on consumer state.
+ */
+export const LifecycleStates: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "How the helpers compose with the rest of the body. Each example shows the same Table shell with a different body — Skeleton (loading), TableEmpty (no results), and a populated body. In consumer code this is a single `<TableBody>` whose contents switch on loading/empty state.",
+      },
+    },
+  },
+  render: () => {
+    const Header = () => (
+      <TableHead>
+        <TableRow header>
+          <TableHeaderCell>Title</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+          <TableHeaderCell>Owner</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+    );
+
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+        <section>
+          <h4 style={{ margin: "0 0 8px 0", fontFamily: "var(--font-family-base)" }}>
+            Loading
+          </h4>
+          <Table>
+            <Header />
+            <TableBody>
+              <TableSkeleton rows={3} columns={3} />
+            </TableBody>
+          </Table>
+        </section>
+
+        <section>
+          <h4 style={{ margin: "0 0 8px 0", fontFamily: "var(--font-family-base)" }}>
+            Empty
+          </h4>
+          <Table>
+            <Header />
+            <TableBody>
+              <TableEmpty
+                colSpan={3}
+                illustration={<EmptyIllustration />}
+                title="No content yet"
+                description="Once you create content, it'll appear here."
+                action={<Button variant="neutral">Create content</Button>}
+              />
+            </TableBody>
+          </Table>
+        </section>
+
+        <section>
+          <h4 style={{ margin: "0 0 8px 0", fontFamily: "var(--font-family-base)" }}>
+            Loaded
+          </h4>
+          <Table>
+            <Header />
+            <TableBody>
+              <TableRow>
+                <TableCell>Honoring Those Who Served</TableCell>
+                <TableCell>Published</TableCell>
+                <TableCell>Krisha M.</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Franchises that Support Veterans</TableCell>
+                <TableCell>Draft</TableCell>
+                <TableCell>John Doe</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </section>
+      </div>
+    );
+  },
 };
