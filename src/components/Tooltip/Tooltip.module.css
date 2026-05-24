@@ -189,55 +189,57 @@
   filter: drop-shadow(0 1px 1px rgba(25, 27, 35, 0.06));
 }
 
-/* Arrow placements — 8px tall × 16px wide triangle pointing outward */
+/* Arrow placements — 8px tall × 16px wide triangle pointing toward the (conceptual) trigger.
+   `placement` follows floating-ui convention: it names where the tooltip sits relative
+   to its trigger, so the arrow points the opposite direction back at the trigger. */
 
-/* Top edges (arrow above body, pointing up) */
+/* placement=top → tooltip sits ABOVE trigger → arrow on BOTTOM edge pointing DOWN */
 .placement_top .arrow,
 .placement_top_start .arrow,
 .placement_top_end .arrow {
-  top: -8px;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid currentColor;
-}
-.placement_top .arrow { left: 50%; transform: translateX(-50%); }
-.placement_top_start .arrow { left: 16px; }
-.placement_top_end .arrow { right: 16px; }
-
-/* Bottom edges (arrow below body, pointing down) */
-.placement_bottom .arrow,
-.placement_bottom_start .arrow,
-.placement_bottom_end .arrow {
   bottom: -8px;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-top: 8px solid currentColor;
 }
+.placement_top .arrow { left: 50%; transform: translateX(-50%); }
+.placement_top_start .arrow { left: 16px; }
+.placement_top_end .arrow { right: 16px; }
+
+/* placement=bottom → tooltip sits BELOW trigger → arrow on TOP edge pointing UP */
+.placement_bottom .arrow,
+.placement_bottom_start .arrow,
+.placement_bottom_end .arrow {
+  top: -8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid currentColor;
+}
 .placement_bottom .arrow { left: 50%; transform: translateX(-50%); }
 .placement_bottom_start .arrow { left: 16px; }
 .placement_bottom_end .arrow { right: 16px; }
 
-/* Left edges (arrow on left of body, pointing left) */
+/* placement=left → tooltip sits LEFT of trigger → arrow on RIGHT edge pointing RIGHT */
 .placement_left .arrow,
 .placement_left_start .arrow,
 .placement_left_end .arrow {
-  left: -8px;
+  right: -8px;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-right: 8px solid currentColor;
+  border-left: 8px solid currentColor;
 }
 .placement_left .arrow { top: 50%; transform: translateY(-50%); }
 .placement_left_start .arrow { top: 16px; }
 .placement_left_end .arrow { bottom: 16px; }
 
-/* Right edges (arrow on right of body, pointing right) */
+/* placement=right → tooltip sits RIGHT of trigger → arrow on LEFT edge pointing LEFT */
 .placement_right .arrow,
 .placement_right_start .arrow,
 .placement_right_end .arrow {
-  right: -8px;
+  left: -8px;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-left: 8px solid currentColor;
+  border-right: 8px solid currentColor;
 }
 .placement_right .arrow { top: 50%; transform: translateY(-50%); }
 .placement_right_start .arrow { top: 16px; }
