@@ -1,4 +1,6 @@
+import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import type { TableSortDirection } from "./Table";
 import { Button } from "../Button/Button";
 import { IconButton } from "../IconButton/IconButton";
 import { StatusBadge } from "../StatusBadge/StatusBadge";
@@ -583,4 +585,133 @@ export const ColumnSizing: Story = {
       </TableBody>
     </Table>
   ),
+};
+
+/* ---------- 09 — Sortable ---------- */
+/**
+ * Static showcase of the 4 `sortDirection` states on `TableHeaderCell`.
+ * Mirrors the Figma `Table / HeaderCell` Sort axis (None · Sortable ·
+ * Ascending · Descending).
+ */
+export const Sortable: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Set `sortable` on a header cell to render the sort affordance — children are wrapped in an inner `<button>`, `aria-sort` is written on the `<th>`, and an indicator icon reflects `sortDirection`. The unsorted indicator is muted; `ascending` and `descending` use the active text color. Selection of which column is sorted (and the direction cycle) is consumer-owned.",
+      },
+    },
+  },
+  render: () => (
+    <Table>
+      <TableHead>
+        <TableRow header>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell sortable sortDirection="none">
+            Role
+          </TableHeaderCell>
+          <TableHeaderCell sortable sortDirection="ascending">
+            Status
+          </TableHeaderCell>
+          <TableHeaderCell sortable sortDirection="descending">
+            Joined
+          </TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Krisha M.</TableCell>
+          <TableCell>Editor</TableCell>
+          <TableCell>Active</TableCell>
+          <TableCell type="date">Oct 20, 2023</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>John Doe</TableCell>
+          <TableCell>Author</TableCell>
+          <TableCell>Active</TableCell>
+          <TableCell type="date">Oct 29, 2023</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Jayesh R.</TableCell>
+          <TableCell>Reviewer</TableCell>
+          <TableCell>Invited</TableCell>
+          <TableCell type="date">Oct 20, 2023</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+};
+
+/* ---------- 10 — SortableInteractive ---------- */
+/**
+ * Click the "Joined" header to cycle sort direction. Demonstrates a typical
+ * consumer-owned cycle: none → ascending → descending → none.
+ */
+export const SortableInteractive: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Sort state lives in the consumer; the DS only renders the affordance and fires `onSort`. Here a `useState` hook cycles through `none → ascending → descending → none` on each click and re-orders the rows accordingly.",
+      },
+    },
+  },
+  render: () => {
+    type Row = { name: string; role: string; joined: string };
+    const data: Row[] = [
+      { name: "Krisha M.", role: "Editor", joined: "2023-10-20" },
+      { name: "John Doe", role: "Author", joined: "2023-10-29" },
+      { name: "Jayesh R.", role: "Reviewer", joined: "2023-10-20" },
+      { name: "Maya P.", role: "Editor", joined: "2023-11-04" },
+    ];
+
+    const formatDate = (iso: string) =>
+      new Date(iso).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+
+    const [direction, setDirection] = useState<TableSortDirection>("none");
+
+    const cycle = () =>
+      setDirection((d) =>
+        d === "none" ? "ascending" : d === "ascending" ? "descending" : "none",
+      );
+
+    const sorted =
+      direction === "none"
+        ? data
+        : [...data].sort((a, b) => {
+            const cmp = a.joined.localeCompare(b.joined);
+            return direction === "ascending" ? cmp : -cmp;
+          });
+
+    return (
+      <Table>
+        <TableHead>
+          <TableRow header>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Role</TableHeaderCell>
+            <TableHeaderCell
+              sortable
+              sortDirection={direction}
+              onSort={cycle}
+            >
+              Joined
+            </TableHeaderCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sorted.map((r) => (
+            <TableRow key={r.name}>
+              <TableCell>{r.name}</TableCell>
+              <TableCell>{r.role}</TableCell>
+              <TableCell type="date">{formatDate(r.joined)}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    );
+  },
 };
