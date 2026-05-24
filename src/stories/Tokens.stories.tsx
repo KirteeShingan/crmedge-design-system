@@ -11,15 +11,15 @@ import type { CSSProperties, ReactNode } from 'react';
  */
 
 const DEFAULT_RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
-const ORANGE_RAMP_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800] as const;
 
 const RAMPS: ReadonlyArray<{
   name: string;
   prefix: string;
   steps: ReadonlyArray<number>;
 }> = [
-  { name: 'Primary · Orange', prefix: 'color-primary-orange', steps: ORANGE_RAMP_STEPS },
+  { name: 'Primary · Orange', prefix: 'color-primary-orange', steps: DEFAULT_RAMP_STEPS },
   { name: 'Secondary · Neutral', prefix: 'color-secondary-neutral', steps: DEFAULT_RAMP_STEPS },
+  { name: 'Accent · Blue', prefix: 'color-accent-blue', steps: DEFAULT_RAMP_STEPS },
   { name: 'Accent · Green', prefix: 'color-accent-green', steps: DEFAULT_RAMP_STEPS },
   { name: 'Accent · Yellow', prefix: 'color-accent-yellow', steps: DEFAULT_RAMP_STEPS },
   { name: 'Accent · Red', prefix: 'color-accent-red', steps: DEFAULT_RAMP_STEPS },
@@ -93,6 +93,27 @@ const SEMANTIC_GROUPS = [
   {
     title: 'Interaction',
     tokens: [{ name: 'interaction-hover', aliasOf: 'secondary-neutral-100' }],
+  },
+  {
+    title: 'Neutral',
+    tokens: [
+      { name: 'neutral-default', aliasOf: 'secondary-neutral-500' },
+      { name: 'neutral-hover', aliasOf: 'secondary-neutral-600' },
+      { name: 'neutral-active', aliasOf: 'secondary-neutral-700' },
+      { name: 'neutral-light', aliasOf: 'secondary-neutral-50' },
+      { name: 'neutral-subtle', aliasOf: 'secondary-neutral-100' },
+      { name: 'neutral-disabled', aliasOf: 'secondary-neutral-100' },
+    ],
+  },
+  {
+    title: 'Accent · Blue',
+    tokens: [
+      { name: 'accent-blue-default', aliasOf: 'accent-blue-500' },
+      { name: 'accent-blue-hover', aliasOf: 'accent-blue-600' },
+      { name: 'accent-blue-active', aliasOf: 'accent-blue-700' },
+      { name: 'accent-blue-light', aliasOf: 'accent-blue-100' },
+      { name: 'accent-blue-subtle', aliasOf: 'accent-blue-50' },
+    ],
   },
 ] as const;
 
