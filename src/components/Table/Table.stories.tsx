@@ -178,7 +178,7 @@ export const CellTypes: Story = {
               <Button variant="secondary" size="small">
                 Secondary
               </Button>
-              <Button variant="tertiary" size="small">
+              <Button variant="neutral" size="small">
                 Neutral
               </Button>
               <IconButton
@@ -365,7 +365,7 @@ export const PlaygroundAssembly: Story = {
                       <Button variant="secondary" size="small">
                         Edit
                       </Button>
-                      <Button variant="tertiary" size="small">
+                      <Button variant="neutral" size="small">
                         Duplicate
                       </Button>
                       <IconButton
