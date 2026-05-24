@@ -38,6 +38,9 @@ export type {
   TooltipTriggerEvent,
 } from "./components/Tooltip";
 
+export { Pagination, PageNumber } from "./components/Pagination";
+export type { PaginationProps, PageNumberProps } from "./components/Pagination";
+
 export {
   TableContainer,
   Table,
