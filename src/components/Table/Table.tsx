@@ -2,10 +2,12 @@ import { forwardRef } from "react";
 import type {
   ColHTMLAttributes,
   HTMLAttributes,
+  ReactNode,
   TableHTMLAttributes,
   TdHTMLAttributes,
   ThHTMLAttributes,
 } from "react";
+import { Checkbox } from "../Checkbox/Checkbox";
 import styles from "./Table.module.css";
 
 /* Compound primitives for tabular data.
@@ -437,6 +439,141 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
       >
         {children}
       </td>
+    );
+  },
+);
+
+/* ---------- TableSelectionCell ----------
+ * Mirrors the Figma `Table / SelectionCell` set 2728:142 (State variants
+ * Unchecked | Checked | Indeterminate). Renders a centered Checkbox.
+ * `header` toggles between <th scope="col"> (select-all) and <td>
+ * (per-row). Selection state is consumer-owned. */
+
+export interface TableSelectionCellProps {
+  /**
+   * Render as a `<th scope="col">` instead of `<td>`. Use inside
+   * `<TableHead>` for the select-all column.
+   */
+  header?: boolean;
+  /**
+   * Whether the checkbox is checked. Ignored when `indeterminate` is true.
+   */
+  checked?: boolean;
+  /**
+   * Indeterminate (mixed) state — typically used on the header cell when
+   * some-but-not-all body rows are selected.
+   */
+  indeterminate?: boolean;
+  /**
+   * Disabled state on the checkbox.
+   */
+  disabled?: boolean;
+  /**
+   * Fired when the user toggles the checkbox. The new checked value is
+   * passed; consumers update their own selection model.
+   */
+  onChange?: (checked: boolean) => void;
+  /**
+   * Accessible label for the checkbox. Defaults to "Select all" for header
+   * cells and "Select row" otherwise. Pass a row-identifying label when
+   * possible (e.g. "Select John Doe").
+   */
+  "aria-label"?: string;
+  className?: string;
+}
+
+export const TableSelectionCell = forwardRef<
+  HTMLTableCellElement,
+  TableSelectionCellProps
+>(function TableSelectionCell(props, ref) {
+  const {
+    header,
+    checked,
+    indeterminate,
+    disabled,
+    onChange,
+    "aria-label": ariaLabel,
+    className,
+  } = props;
+
+  const label = ariaLabel ?? (header ? "Select all" : "Select row");
+
+  const checkbox = (
+    <span className={styles.selectionCellInner}>
+      <Checkbox
+        checked={checked}
+        indeterminate={indeterminate}
+        disabled={disabled}
+        onChange={(e) => onChange?.(e.target.checked)}
+        aria-label={label}
+      />
+    </span>
+  );
+
+  const cellClassName = cx(
+    styles.selectionCell,
+    header && styles.selectionCell_header,
+    className,
+  );
+
+  if (header) {
+    return (
+      <th
+        ref={ref}
+        scope="col"
+        className={cellClassName}
+      >
+        {checkbox}
+      </th>
+    );
+  }
+  return (
+    <td ref={ref} className={cellClassName}>
+      {checkbox}
+    </td>
+  );
+});
+
+/* ---------- TwoLineCell ----------
+ * Mirrors the Figma `Table / TwoLineCell` set 2728:143 (Subtitle axis
+ * Default | Link). Inner-content helper — render inside a regular
+ * `<TableCell>`. Title is bold + text-default; subtitle defaults to a
+ * smaller text-secondary line. `subtitleVariant="link"` paints the
+ * subtitle with --color-text-link for URL-style content (consumers wrap
+ * in `<a>` if they want it clickable). */
+
+export type TwoLineSubtitleVariant = "default" | "link";
+
+export interface TwoLineCellProps {
+  /** Primary line — bold, text-default. */
+  title: ReactNode;
+  /** Optional secondary line below the title. */
+  subtitle?: ReactNode;
+  /**
+   * Styling for the subtitle. `default` = small text-secondary;
+   * `link` = small text-link (typically used for URLs).
+   */
+  subtitleVariant?: TwoLineSubtitleVariant;
+  className?: string;
+}
+
+export const TwoLineCell = forwardRef<HTMLDivElement, TwoLineCellProps>(
+  function TwoLineCell(props, ref) {
+    const { title, subtitle, subtitleVariant = "default", className } = props;
+    return (
+      <div ref={ref} className={cx(styles.twoLine, className)}>
+        <span className={styles.twoLine_title}>{title}</span>
+        {subtitle !== undefined && subtitle !== null && subtitle !== "" ? (
+          <span
+            className={cx(
+              styles.twoLine_subtitle,
+              subtitleVariant === "link" && styles.twoLine_subtitleLink,
+            )}
+          >
+            {subtitle}
+          </span>
+        ) : null}
+      </div>
     );
   },
 );

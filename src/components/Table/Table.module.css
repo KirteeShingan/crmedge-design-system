@@ -236,3 +236,67 @@
  * so consumers placing flex children inside a cell should pass an
  * align that matches their flex justify-content. The two are independent
  * by design — this keeps the cell from imposing flex on arbitrary children. */
+
+/* ---------- selection cell ----------
+ * Narrow cell hosting a centered Checkbox. Used as the first column for
+ * row selection. `header` variant renders as <th scope="col"> with a
+ * select-all checkbox (indeterminate when partial). Mirrors Figma
+ * `Table / SelectionCell` set 2728:142. */
+.selectionCell {
+  width: 48px;
+  padding: var(--table-buttons-padding-y) 12px;
+  vertical-align: middle;
+}
+
+.selectionCell_header {
+  background-color: var(--color-background-white);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.selectionCellInner {
+  /* Centers the Checkbox horizontally. The Checkbox root is a block-level
+   * <div>, so we wrap it in an inline-flex span and center via flex. */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------- two-line cell ----------
+ * Content helper meant to live inside a regular <TableCell>. Title on
+ * top (bold, text-default), subtitle below (small, text-secondary or
+ * text-link). Mirrors Figma `Table / TwoLineCell` set 2728:143. */
+.twoLine {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.twoLine_title {
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-default);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.twoLine_subtitle {
+  font-family: var(--font-family-base);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.twoLine_subtitleLink {
+  /* URL/link styling — same size + weight as default subtitle, swapped
+   * color. Consumers wrap in <a> for the actual link behaviour; the
+   * styling holds regardless. */
+  color: var(--color-text-link);
+}

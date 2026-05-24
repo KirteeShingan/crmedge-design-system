@@ -14,6 +14,8 @@ import {
   TableHead,
   TableHeaderCell,
   TableRow,
+  TableSelectionCell,
+  TwoLineCell,
 } from "./Table";
 
 /* ---------- demo icons (mirrors StatusBadge stories) ---------- */
@@ -714,4 +716,150 @@ export const SortableInteractive: Story = {
       </Table>
     );
   },
+};
+
+/* ---------- 11 — Selection ---------- */
+/**
+ * Interactive row selection using `<TableSelectionCell>`. Header carries
+ * the select-all checkbox (auto-indeterminate when partial); body rows
+ * carry per-row checkboxes. State is consumer-owned — the DS only
+ * renders the affordance.
+ */
+export const Selection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`TableSelectionCell` wraps the Checkbox primitive and renders centered inside a narrow column. `header` switches it to a `<th>` and is the right place for the select-all checkbox. `indeterminate` on the header reads when some-but-not-all rows are selected. Mirrors the Figma `Table / SelectionCell` set (Unchecked · Checked · Indeterminate).",
+      },
+    },
+  },
+  render: () => {
+    type Row = { id: string; name: string; role: string };
+    const data: Row[] = [
+      { id: "u1", name: "Krisha M.", role: "Editor" },
+      { id: "u2", name: "John Doe", role: "Author" },
+      { id: "u3", name: "Jayesh R.", role: "Reviewer" },
+      { id: "u4", name: "Maya P.", role: "Editor" },
+    ];
+
+    const [selected, setSelected] = useState<Set<string>>(new Set());
+
+    const allChecked = data.length > 0 && selected.size === data.length;
+    const someChecked = selected.size > 0 && selected.size < data.length;
+
+    const toggleAll = (checked: boolean) =>
+      setSelected(checked ? new Set(data.map((r) => r.id)) : new Set());
+
+    const toggleRow = (id: string, checked: boolean) =>
+      setSelected((prev) => {
+        const next = new Set(prev);
+        if (checked) next.add(id);
+        else next.delete(id);
+        return next;
+      });
+
+    return (
+      <Table>
+        <TableHead>
+          <TableRow header>
+            <TableSelectionCell
+              header
+              checked={allChecked}
+              indeterminate={someChecked}
+              onChange={toggleAll}
+            />
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Role</TableHeaderCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((r) => {
+            const isSelected = selected.has(r.id);
+            return (
+              <TableRow key={r.id} selected={isSelected}>
+                <TableSelectionCell
+                  checked={isSelected}
+                  onChange={(c) => toggleRow(r.id, c)}
+                  aria-label={`Select ${r.name}`}
+                />
+                <TableCell>{r.name}</TableCell>
+                <TableCell>{r.role}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    );
+  },
+};
+
+/* ---------- 12 — TwoLineContent ---------- */
+/**
+ * Two-line content cells using `<TwoLineCell>`. Both the default
+ * (text-secondary subtitle) and link (text-link subtitle) variants
+ * are shown.
+ */
+export const TwoLineContent: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`TwoLineCell` is a content helper — render it inside a regular `<TableCell>` whenever a column needs a title + subtitle stack. `subtitleVariant=\"link\"` paints the subtitle with `--color-text-link` for URL/permalink content. Mirrors the Figma `Table / TwoLineCell` set (Default · Link).",
+      },
+    },
+  },
+  render: () => (
+    <Table>
+      <TableHead>
+        <TableRow header>
+          <TableHeaderCell>Content</TableHeaderCell>
+          <TableHeaderCell>Permalink</TableHeaderCell>
+          <TableHeaderCell>Owner</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>
+            <TwoLineCell
+              title="Honoring Those Who Served"
+              subtitle="Published Oct 23, 2023"
+            />
+          </TableCell>
+          <TableCell>
+            <TwoLineCell
+              title="Article"
+              subtitle={
+                <a href="#article-1" style={{ color: "inherit" }}>
+                  self-44367503.hubspotpagebuilder.com/honoring
+                </a>
+              }
+              subtitleVariant="link"
+            />
+          </TableCell>
+          <TableCell>Krisha M.</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <TwoLineCell
+              title="Franchises that Support Veterans"
+              subtitle="Draft · last edited 2h ago"
+            />
+          </TableCell>
+          <TableCell>
+            <TwoLineCell
+              title="Web Experience"
+              subtitle={
+                <a href="#article-2" style={{ color: "inherit" }}>
+                  self-44367503.hubspotpagebuilder.com/franchises-veterans
+                </a>
+              }
+              subtitleVariant="link"
+            />
+          </TableCell>
+          <TableCell>John Doe</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
 };

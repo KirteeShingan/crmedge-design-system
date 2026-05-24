@@ -48,6 +48,8 @@ export {
   TableRow,
   TableHeaderCell,
   TableCell,
+  TableSelectionCell,
+  TwoLineCell,
 } from "./components/Table";
 export type {
   TableContainerProps,
@@ -62,4 +64,8 @@ export type {
   TableCellType,
   TableCellAlign,
   TableDensity,
+  TableSortDirection,
+  TableSelectionCellProps,
+  TwoLineCellProps,
+  TwoLineSubtitleVariant,
 } from "./components/Table";
