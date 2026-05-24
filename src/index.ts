@@ -37,3 +37,29 @@ export type {
   TooltipTriggerProps,
   TooltipTriggerEvent,
 } from "./components/Tooltip";
+
+export {
+  TableContainer,
+  Table,
+  TableColGroup,
+  TableCol,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeaderCell,
+  TableCell,
+} from "./components/Table";
+export type {
+  TableContainerProps,
+  TableProps,
+  TableColGroupProps,
+  TableColProps,
+  TableHeadProps,
+  TableBodyProps,
+  TableRowProps,
+  TableHeaderCellProps,
+  TableCellProps,
+  TableCellType,
+  TableCellAlign,
+  TableDensity,
+} from "./components/Table";
