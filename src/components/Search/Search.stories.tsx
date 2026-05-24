@@ -71,7 +71,7 @@ export const Controlled: Story = {
   },
 };
 
-export const FigmaMatrix: Story = {
+export const AllStates: Story = {
   parameters: { layout: "centered" },
   render: () => (
     <div
