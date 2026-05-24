@@ -104,7 +104,10 @@
 
 /* ---------- row (body) ---------- */
 .row {
-  background-color: var(--color-background-surface);
+  /* Body Default = Background/White (NOT Background/Surface, which is the
+   * light-grey tint used by surrounding page chrome). Verify on the Figma
+   * Sample Table reference at file DmL4gv3m10KzL2Y6yLMDJ5 → Row Default. */
+  background-color: var(--color-background-white);
   border-bottom: 1px solid var(--color-border-subtle);
   transition: background-color 120ms ease;
 }
