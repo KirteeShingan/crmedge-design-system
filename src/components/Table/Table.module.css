@@ -300,3 +300,99 @@
    * styling holds regardless. */
   color: var(--color-text-link);
 }
+
+/* ---------- empty state ----------
+ * Renders a single <tr> with a colSpan <td> hosting a centered
+ * illustration + title + description + action stack. Mirrors Figma
+ * `Table / Empty` 2730:142. Designed to drop straight into <TableBody>
+ * when there are no data rows. */
+.emptyRow {
+  /* No row chrome — we don't want the divider or hover affordance under
+   * an empty-state. */
+}
+
+.emptyCell {
+  padding: 0;
+  background-color: var(--color-background-white);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.empty_illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* The Figma master uses a 120x80 illustration. Cap height so unusually
+   * tall illustrations don't dominate the layout. */
+  max-height: 120px;
+}
+
+.empty_title {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-text-default);
+}
+
+.empty_description {
+  margin: 0;
+  max-width: 480px;
+  font-family: var(--font-family-base);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-secondary);
+}
+
+.empty_action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+/* ---------- skeleton ----------
+ * Mirrors Figma `Table / Skeleton` 2733:148. Each cell hosts a fixed-
+ * height bar bound to the neutral-light token. A subtle opacity-pulse
+ * animation indicates loading without aggressive motion. Respects
+ * prefers-reduced-motion. */
+.skeletonRow {
+  /* Inherits .row chrome (divider). No hover affordance from the parent
+   * .row:hover rule because :hover is gated on :not(.row_disabled) etc.,
+   * but the skeleton row never carries those — we suppress hover here. */
+}
+.skeletonRow:hover {
+  background-color: var(--color-background-white);
+}
+
+.skeletonCell {
+  /* Inherits .cell padding; bar fills the cell width. */
+}
+
+.skeletonBar {
+  display: block;
+  width: 100%;
+  height: 12px;
+  border-radius: 4px;
+  background-color: var(--color-neutral-light);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeletonBar { animation: none; opacity: 0.7; }
+}

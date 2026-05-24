@@ -577,3 +577,99 @@ export const TwoLineCell = forwardRef<HTMLDivElement, TwoLineCellProps>(
     );
   },
 );
+
+/* ---------- TableEmpty ----------
+ * Empty-state row spanning all columns. Mirrors Figma `Table / Empty`
+ * (`2730:142`): illustration + title + description + optional action(s).
+ * Render inside `<TableBody>` when there are no data rows. */
+
+export interface TableEmptyProps {
+  /**
+   * Illustration / icon shown above the text. Accepts arbitrary
+   * ReactNode — typically an inline SVG (sized ~80–120px) or `<img>`.
+   */
+  illustration?: ReactNode;
+  /** Primary heading, e.g. "No content yet". */
+  title: string;
+  /** Optional supporting copy below the title. */
+  description?: ReactNode;
+  /**
+   * Optional action slot — typically one or more `<Button>`s. Pass a
+   * fragment for multiple actions (the Figma master uses Neutral primary
+   * + Tertiary secondary).
+   */
+  action?: ReactNode;
+  /**
+   * Column-span for the inner `<td>`. Defaults to a large number that
+   * absorbs every column. Set explicitly if your table has a known column
+   * count and you want strict spanning behaviour.
+   */
+  colSpan?: number;
+  className?: string;
+}
+
+export const TableEmpty = forwardRef<HTMLTableRowElement, TableEmptyProps>(
+  function TableEmpty(props, ref) {
+    const {
+      illustration,
+      title,
+      description,
+      action,
+      colSpan = 100,
+      className,
+    } = props;
+    return (
+      <tr ref={ref} className={cx(styles.emptyRow, className)}>
+        <td colSpan={colSpan} className={styles.emptyCell}>
+          <div className={styles.empty}>
+            {illustration ? (
+              <div className={styles.empty_illustration}>{illustration}</div>
+            ) : null}
+            <h3 className={styles.empty_title}>{title}</h3>
+            {description !== undefined && description !== null && description !== "" ? (
+              <p className={styles.empty_description}>{description}</p>
+            ) : null}
+            {action ? (
+              <div className={styles.empty_action}>{action}</div>
+            ) : null}
+          </div>
+        </td>
+      </tr>
+    );
+  },
+);
+
+/* ---------- TableSkeleton ----------
+ * Loading placeholder rows. Mirrors Figma `Table / Skeleton` (`2733:148`).
+ * Renders `rows` × `columns` of pulsing bars inside `<tr>`/`<td>` so it
+ * slots cleanly inside `<TableBody>` while data loads. */
+
+export interface TableSkeletonProps {
+  /** How many rows of placeholders to render. Default 5. */
+  rows?: number;
+  /** How many cells per row. Default 4. */
+  columns?: number;
+  className?: string;
+}
+
+export const TableSkeleton = ({
+  rows = 5,
+  columns = 4,
+  className,
+}: TableSkeletonProps) => (
+  <>
+    {Array.from({ length: rows }, (_, r) => (
+      <tr
+        key={r}
+        aria-busy="true"
+        className={cx(styles.row, styles.skeletonRow, className)}
+      >
+        {Array.from({ length: columns }, (_, c) => (
+          <td key={c} className={cx(styles.cell, styles.skeletonCell)}>
+            <span className={styles.skeletonBar} />
+          </td>
+        ))}
+      </tr>
+    ))}
+  </>
+);
