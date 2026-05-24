@@ -3,7 +3,7 @@
  */
 
 :root {
-  --color-primary-orange-50: #fffcf0;
+  --color-primary-orange-50: #fff4f0;
   --color-primary-orange-100: #feeee9;
   --color-primary-orange-200: #f9bba7;
   --color-primary-orange-300: #f6987c;
@@ -12,6 +12,7 @@
   --color-primary-orange-600: #d84c20;
   --color-primary-orange-700: #a83b19;
   --color-primary-orange-800: #782a12;
+  --color-primary-orange-900: #48190b;
   --color-primary-charcoal: #1f0700;
   --color-secondary-neutral-50: #f7f8fc;
   --color-secondary-neutral-100: #eff0f3;
@@ -122,8 +123,11 @@
   --color-status-error-subtle: var(--color-accent-red-50);
   --color-status-error-text: var(--color-accent-red-700);
   --color-interaction-hover: var(--color-secondary-neutral-100);
-  --color-neutral-subtle: var(--color-secondary-neutral-100);
+  --color-neutral-default: var(--color-secondary-neutral-500);
+  --color-neutral-hover: var(--color-secondary-neutral-600);
   --color-neutral-active: var(--color-secondary-neutral-700);
+  --color-neutral-light: var(--color-secondary-neutral-50);
+  --color-neutral-subtle: var(--color-secondary-neutral-100);
   --color-neutral-disabled: var(--color-secondary-neutral-100);
   --spacing-xxs: var(--size-4);
   --spacing-xs: var(--size-8);

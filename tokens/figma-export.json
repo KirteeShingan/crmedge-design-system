@@ -1,20 +1,20 @@
 {
   "$meta": {
     "source": "Figma file DmL4gv3m10KzL2Y6yLMDJ5",
-    "pulledAt": "2026-05-23",
+    "pulledAt": "2026-05-24",
     "collections": [
       { "name": "Colours", "id": "VariableCollectionId:55:267989", "modes": ["Mode 1"], "variableCount": 64 },
       { "name": "Size", "id": "VariableCollectionId:56:268352", "modes": ["Mode 1"], "variableCount": 17 },
       { "name": "Spacing", "id": "VariableCollectionId:56:268371", "modes": ["Mode 1"], "variableCount": 8 },
       { "name": "Radius", "id": "VariableCollectionId:56:268382", "modes": ["Mode 1"], "variableCount": 8 },
       { "name": "Grid", "id": "VariableCollectionId:66:274137", "modes": ["Mode 1"], "variableCount": 2 },
-      { "name": "Semantic Colours", "id": "VariableCollectionId:2607:2", "modes": ["Light"], "variableCount": 36 }
+      { "name": "Semantic Colours", "id": "VariableCollectionId:2607:2", "modes": ["Light"], "variableCount": 42 }
     ]
   },
   "color": {
     "primary": {
       "orange": {
-        "50":  { "$value": "#FFFCF0", "$type": "color" },
+        "50":  { "$value": "#FFF4F0", "$type": "color" },
         "100": { "$value": "#FEEEE9", "$type": "color" },
         "200": { "$value": "#F9BBA7", "$type": "color" },
         "300": { "$value": "#F6987C", "$type": "color" },
@@ -22,7 +22,8 @@
         "500": { "$value": "#F05424", "$type": "color" },
         "600": { "$value": "#D84C20", "$type": "color" },
         "700": { "$value": "#A83B19", "$type": "color" },
-        "800": { "$value": "#782A12", "$type": "color" }
+        "800": { "$value": "#782A12", "$type": "color" },
+        "900": { "$value": "#48190B", "$type": "color" }
       },
       "charcoal": { "$value": "#1F0700", "$type": "color" }
     },
@@ -151,8 +152,11 @@
       "hover": { "$value": "{color.secondary.neutral.100}", "$type": "color" }
     },
     "neutral": {
-      "subtle":   { "$value": "{color.secondary.neutral.100}", "$type": "color" },
+      "default":  { "$value": "{color.secondary.neutral.500}", "$type": "color" },
+      "hover":    { "$value": "{color.secondary.neutral.600}", "$type": "color" },
       "active":   { "$value": "{color.secondary.neutral.700}", "$type": "color" },
+      "light":    { "$value": "{color.secondary.neutral.50}",  "$type": "color" },
+      "subtle":   { "$value": "{color.secondary.neutral.100}", "$type": "color" },
       "disabled": { "$value": "{color.secondary.neutral.100}", "$type": "color" }
     }
   },
