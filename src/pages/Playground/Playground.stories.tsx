@@ -9,7 +9,7 @@ const meta: Meta<typeof Playground> = {
     docs: {
       description: {
         component:
-          "POC reference page — hand-rolled 1:1 replica of Figma frame 2654:2557 on page '🎮 Playground (Fixed)' in file DmL4gv3m10KzL2Y6yLMDJ5. No reusable components — placeholder for the real Checkbox, Badge, Table, Pagination, Avatar Group, Side NavBar, Global Header, Filter Dropdown, Search Field, Tooltip, and Footer components which are not yet built.",
+          "Page-level composition mirroring Figma frame `2754:3249` on the 🎮 Playground page of file `DmL4gv3m10KzL2Y6yLMDJ5`. Assembled almost entirely from the design-system components in `src/components/`. The remaining gaps — filter dropdown chips, row Edit/Duplicate link buttons, and the page footer — are not yet design-system components and live inline in this page.",
       },
     },
   },
