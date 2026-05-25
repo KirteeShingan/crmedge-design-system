@@ -76,3 +76,6 @@ export type {
   TableEmptyProps,
   TableSkeletonProps,
 } from "./components/Table";
+
+export { GlobalHeader } from "./components/GlobalHeader";
+export type { GlobalHeaderProps } from "./components/GlobalHeader";
