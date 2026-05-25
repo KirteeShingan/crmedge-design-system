@@ -140,7 +140,9 @@
   font-size: 14px;
   line-height: 20px;
   color: var(--color-text-default);
-  vertical-align: middle;
+  /* Mirrors Figma `items-start` on every Table / Cell instance — the
+   * content sits at the top of the cell regardless of row height. */
+  vertical-align: top;
 }
 
 /* Cell type variants — currently differ only on vertical padding.
@@ -165,7 +167,7 @@
   font-size: 14px;
   line-height: 20px;
   color: var(--color-text-secondary);
-  vertical-align: middle;
+  vertical-align: top;
   white-space: nowrap;
   text-align: start;
 }
@@ -296,9 +298,10 @@
 
 .twoLine_subtitleLink {
   /* URL/link styling — same size + weight as default subtitle, swapped
-   * color. Consumers wrap in <a> for the actual link behaviour; the
-   * styling holds regardless. */
-  color: var(--color-text-link);
+   * color. Uses the accent-blue ramp so URLs read as conventional links,
+   * independent of the brand `--color-text-link` (orange). Consumers wrap
+   * in <a> for the actual link behaviour; the styling holds regardless. */
+  color: var(--color-accent-blue-default);
 }
 
 /* ---------- empty state ----------
