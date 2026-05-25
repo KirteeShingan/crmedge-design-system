@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { Button } from "../../components/Button";
+import { IconButton } from "../../components/IconButton";
 import { Search } from "../../components/Search";
 import { Divider } from "../../components/Divider";
 import { StatusBadge } from "../../components/StatusBadge";
@@ -42,6 +43,12 @@ interface Row {
   updated: string;
   schedule: string;
   by: string;
+  author: string;
+  created: string;
+  /** Primary SEO tag shown as a neutral pill. */
+  seoTag: string;
+  /** Count of additional tags shown as a "+N" neutral pill. */
+  seoTagOverflow: number;
 }
 
 const ROWS: Row[] = [
@@ -54,6 +61,10 @@ const ROWS: Row[] = [
     updated: "Oct 20, 2023",
     schedule: "Oct 23, 2023",
     by: "Krisha M.",
+    author: "J. K. Thompsons",
+    created: "Oct 23, 2023",
+    seoTag: "Entrepreneur",
+    seoTagOverflow: 4,
   },
   {
     id: "r2",
@@ -64,6 +75,10 @@ const ROWS: Row[] = [
     updated: "Oct 24, 2023",
     schedule: "Oct 28, 2023",
     by: "Alex R.",
+    author: "M. L. Davidson",
+    created: "Oct 24, 2023",
+    seoTag: "Community",
+    seoTagOverflow: 5,
   },
   {
     id: "r3",
@@ -74,6 +89,10 @@ const ROWS: Row[] = [
     updated: "Oct 24, 2023",
     schedule: "NA",
     by: "Sam L.",
+    author: "K. J. Brown",
+    created: "Oct 25, 2023",
+    seoTag: "Industry",
+    seoTagOverflow: 3,
   },
   {
     id: "r4",
@@ -84,6 +103,10 @@ const ROWS: Row[] = [
     updated: "Oct 24, 2023",
     schedule: "Oct 28, 2023",
     by: "Jordan K.",
+    author: "R. A. Smith",
+    created: "Oct 26, 2023",
+    seoTag: "Sustainability",
+    seoTagOverflow: 4,
   },
   {
     id: "r5",
@@ -94,6 +117,10 @@ const ROWS: Row[] = [
     updated: "Oct 24, 2023",
     schedule: "NA",
     by: "Lisa E.",
+    author: "D. E. Johnson",
+    created: "Oct 27, 2023",
+    seoTag: "Motivation",
+    seoTagOverflow: 6,
   },
   {
     id: "r6",
@@ -104,6 +131,10 @@ const ROWS: Row[] = [
     updated: "Oct 24, 2023",
     schedule: "NA",
     by: "Jordan K.",
+    author: "A. B. Davis",
+    created: "Oct 28, 2023",
+    seoTag: "Diversity",
+    seoTagOverflow: 5,
   },
   {
     id: "r7",
@@ -114,6 +145,10 @@ const ROWS: Row[] = [
     updated: "Oct 24, 2023",
     schedule: "NA",
     by: "Jordan K.",
+    author: "A. B. Davis",
+    created: "Oct 28, 2023",
+    seoTag: "Diversity",
+    seoTagOverflow: 5,
   },
 ];
 
@@ -180,9 +215,22 @@ export const Playground = () => {
       />
 
       <div className={styles.body}>
-        <SideNav items={sideNavItems} selectedId="content" expanded={false} />
+        <SideNav
+          items={sideNavItems}
+          selectedId="content"
+          expanded={false}
+          /* Force the sidenav to fill the full body height (header → footer)
+           * so the right-edge stroke runs top to bottom. SideNav's own CSS
+           * uses `height: 100%`, but percentage-height needs a parent with
+           * a definite height — flex-defined heights resolve to auto in
+           * some layouts. `align-self: stretch` falls back to the cross-
+           * axis size, and `height: auto` clears the percentage rule that
+           * would otherwise collapse to content-height. */
+          style={{ height: "auto", alignSelf: "stretch" }}
+        />
 
-        <main className={styles.main}>
+        <div className={styles.mainColumn}>
+          <main className={styles.main}>
           <div className={styles.pageHeader}>
             <h1 className={styles.pageTitle}>Playground</h1>
             <div className={styles.pageHeaderActions}>
@@ -197,32 +245,38 @@ export const Playground = () => {
 
           <div className={styles.filterRow}>
             <div className={styles.filterLeft}>
-              <Search
-                size="md"
-                placeholder="Search by content name, type, status..."
-                aria-label="Search content"
-              />
+              <div className={styles.searchWrap}>
+                <Search
+                  size="sm"
+                  fullWidth
+                  placeholder="Search by content name, type, status..."
+                  aria-label="Search content"
+                />
+              </div>
               <Divider orientation="vertical" />
-              <FilterChip label="Content Type" />
-              <FilterChip label="Publish Status" />
-              <FilterChip label="More Filters" />
+              <FilterPill label="Content Type" />
+              <FilterPill label="Publish Status" />
+              <FilterPill label="+4" />
             </div>
-            <Button variant="tertiary" size="medium" iconRight={<ChevronDown />}>
-              Actions
+            <Button variant="neutral" size="medium">
+              More Filters
             </Button>
           </div>
 
           <TableContainer maxWidth="100%" className={styles.tableContainer}>
-            <Table density="md">
+            <Table density="md" className={styles.wideTable}>
               <TableColGroup>
                 <TableCol width={48} />
-                <TableCol width="minmax(280px, 1.6fr)" />
-                <TableCol width={140} />
-                <TableCol width={140} />
-                <TableCol width={130} />
-                <TableCol width={130} />
-                <TableCol width={120} />
-                <TableCol width={150} />
+                <TableCol width={394} />
+                <TableCol width={170} />
+                <TableCol width={170} />
+                <TableCol width={170} />
+                <TableCol width={170} />
+                <TableCol width={170} />
+                <TableCol width={180} />
+                <TableCol width={170} />
+                <TableCol width={200} />
+                <TableCol width={220} />
               </TableColGroup>
               <TableHead>
                 <TableRow header>
@@ -238,7 +292,10 @@ export const Playground = () => {
                   <TableHeaderCell>Updated Date</TableHeaderCell>
                   <TableHeaderCell>Schedule Date</TableHeaderCell>
                   <TableHeaderCell>Updated By</TableHeaderCell>
-                  <TableHeaderCell align="center" className={styles.stickyActionsHead}>
+                  <TableHeaderCell>Author</TableHeaderCell>
+                  <TableHeaderCell>Created Date</TableHeaderCell>
+                  <TableHeaderCell>SEO Tags</TableHeaderCell>
+                  <TableHeaderCell className={styles.stickyActionsHead}>
                     Actions
                   </TableHeaderCell>
                 </TableRow>
@@ -263,18 +320,42 @@ export const Playground = () => {
                     <TableCell type="date">{r.updated}</TableCell>
                     <TableCell type="date">{r.schedule}</TableCell>
                     <TableCell type="text">{r.by}</TableCell>
+                    <TableCell type="text">{r.author}</TableCell>
+                    <TableCell type="date">{r.created}</TableCell>
+                    <TableCell type="badge">
+                      <div className={styles.seoTags}>
+                        <StatusBadge
+                          color="neutral"
+                          className={styles.tagBadge}
+                        >
+                          {r.seoTag}
+                        </StatusBadge>
+                        <StatusBadge
+                          color="neutral"
+                          className={styles.tagBadge}
+                        >
+                          {r.seoTagOverflow}+
+                        </StatusBadge>
+                      </div>
+                    </TableCell>
                     <TableCell
                       type="buttons"
-                      align="center"
                       className={styles.stickyActions}
                     >
                       <div className={styles.rowActions}>
-                        <button type="button" className={styles.rowAction}>
+                        <Button variant="neutral" size="small">
                           Edit
-                        </button>
-                        <button type="button" className={styles.rowAction}>
+                        </Button>
+                        <Button variant="tertiary" size="small">
                           Duplicate
-                        </button>
+                        </Button>
+                        <IconButton
+                          variant="text"
+                          tone="secondary"
+                          size="sm"
+                          aria-label={`More actions for ${r.title}`}
+                          icon={<KebabVerticalIcon />}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>
@@ -290,21 +371,25 @@ export const Playground = () => {
               onPageChange={setPage}
             />
           </div>
-        </main>
-      </div>
+          </main>
 
-      <footer className={styles.footer}>
-        © 2023 CRMEdge.io All rights reserved
-      </footer>
+          <footer className={styles.footer}>
+            © 2023 CRMEdge.io All rights reserved
+          </footer>
+        </div>
+      </div>
     </div>
   );
 };
 
-/* ---------- Inline filter chip (not yet a DS component) ---------- */
-const FilterChip = ({ label }: { label: string }) => (
-  <button type="button" className={styles.filterChip}>
-    <span>{label}</span>
-    <ChevronDown />
+/* ---------- Inline filter pill (not yet a DS component) ----------
+ * Mirrors Figma node 2754:3260 (Content Type / Publish Status / +N).
+ * Background --color-secondary-neutral-50, border --color-border-default,
+ * radius 20px, Inter Medium 12 / 16 (line-height 1.33). No chevron.
+ */
+const FilterPill = ({ label }: { label: string }) => (
+  <button type="button" className={styles.filterPill}>
+    {label}
   </button>
 );
 
@@ -324,7 +409,6 @@ const ico = (d: string, size = 18) => (
   </svg>
 );
 
-const ChevronDown = () => ico("M6 9l6 6 6-6", 16);
 const HomeIcon = () => ico("M3 12l9-9 9 9M5 10v10h14V10");
 const FolderIcon = () => ico(
   "M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
@@ -376,3 +460,19 @@ const ClockIcon = () => (
 );
 const PencilIcon = () =>
   ico("M12 20h9M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4z", 12);
+
+/* Vertical kebab — three dots stacked. Mirrors the Figma
+ * `kabab-horizontal` asset rotated 90° in the Actions IconButton. */
+const KebabVerticalIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <circle cx="10" cy="4" r="1.6" />
+    <circle cx="10" cy="10" r="1.6" />
+    <circle cx="10" cy="16" r="1.6" />
+  </svg>
+);

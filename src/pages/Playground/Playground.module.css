@@ -23,6 +23,16 @@
   display: flex;
   flex: 1;
   min-height: 0;
+  /* align-items defaults to `stretch` so the SideNav fills the full
+   * vertical height of the body — its right-side stroke runs top to
+   * bottom alongside both the main content AND the footer. */
+}
+
+.mainColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .main {
@@ -65,28 +75,49 @@
 .filterLeft {
   display: flex;
   align-items: center;
-  gap: var(--size-12);
+  gap: var(--size-16);
   height: 36px;
 }
 
-/* Out-of-DS placeholder. Replace once Filter / Dropdown lands. */
-.filterChip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--size-8);
-  background: transparent;
-  border: 0;
-  padding: var(--size-4) var(--size-8);
-  font-family: var(--font-family-base);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-default);
-  cursor: pointer;
-  border-radius: var(--size-4);
+/* Search input itself is locked to 400px. The wrapper inherits that width
+ * so the Search root (which we set fullWidth) fills exactly 400px and
+ * never grows with the parent flex row. */
+.searchWrap {
+  width: 400px;
+  flex-shrink: 0;
 }
 
-.filterChip:hover {
-  background: var(--color-background-hover, var(--color-secondary-neutral-100));
+/*
+ * Filter pill (out-of-DS, not yet a real component).
+ * Mirrors Figma node 2754:3260 (Content Type / Publish Status / +N):
+ *   - background: secondary/neutral/50
+ *   - border: 1px solid secondary/neutral/200
+ *   - radius: 20px (pill)
+ *   - padding: 2px 6px
+ *   - typography: Inter Medium 12 / 16 (line-height 1.33)
+ *   - color: secondary/neutral/900 (--color-text-default)
+ * No chevron — the master is text-only.
+ */
+.filterPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: var(--color-secondary-neutral-50);
+  border: 1px solid var(--color-secondary-neutral-200);
+  border-radius: 20px;
+  padding: 2px 6px;
+  font-family: var(--font-family-base);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  color: var(--color-text-default);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filterPill:hover {
+  background: var(--color-secondary-neutral-100);
 }
 
 /* ---------- Table ---------- */
@@ -94,7 +125,32 @@
   background: var(--color-background-white);
   border-radius: var(--size-8);
   border: 1px solid var(--color-border-default);
+  /* Horizontal scroll for the data columns. Anything that scrolls past
+   * the visible area is clipped — only the sticky Actions column stays
+   * pinned to the right edge. */
   overflow-x: auto;
+}
+
+/* The table itself is intentionally wider than the container so column
+ * scrolling is the default state. Mirrors Figma frame 2796:8408 which
+ * sits at 1656px wide.
+ *
+ * `border-collapse: separate` is required so the sticky Actions column's
+ * `box-shadow` can render outside the cell. `border-collapse: collapse`
+ * (the DS default) clips shadows at the cell boundary. */
+.wideTable {
+  min-width: 1700px;
+  width: max-content;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* With border-collapse: separate the row bottom-border vanishes (the DS
+ * sets it on <tr>, which is ignored under separate-borders mode). Re-add
+ * the divider on every cell so the row still reads as a single line. */
+.wideTable tbody td,
+.wideTable thead th {
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 /*
@@ -122,26 +178,27 @@
   z-index: 2;
 }
 
-/* Out-of-DS placeholder. Replace once a Link/RowAction component lands. */
+/* Flex wrapper for the per-row action cluster (Edit · Duplicate · More).
+ * Mirrors Figma node 2796:8512 — items-start, gap-8, left-aligned within
+ * the cell. The buttons themselves are DS components. */
 .rowActions {
   display: inline-flex;
   align-items: center;
-  gap: var(--size-12);
+  gap: var(--size-8);
 }
 
-.rowAction {
-  background: transparent;
-  border: 0;
-  padding: 0;
-  font-family: var(--font-family-base);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-link);
-  cursor: pointer;
+/* SEO Tags column — one neutral StatusBadge for the primary tag plus a
+ * neutral "+N" StatusBadge for the overflow count. The StatusBadge DS
+ * default is UPPERCASE; we override `text-transform` here so titles
+ * render in their natural case (Entrepreneur, Community, …). */
+.seoTags {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-8);
 }
 
-.rowAction:hover {
-  text-decoration: underline;
+.tagBadge {
+  text-transform: none;
 }
 
 /* ---------- Pagination wrapper ---------- */
