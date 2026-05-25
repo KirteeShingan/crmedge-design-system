@@ -96,13 +96,13 @@
 /* ----- Type: Tertiary (text) ----- */
 .variant_tertiary {
   background-color: transparent;
-  color: var(--color-brand-primary);
+  color: var(--color-text-default);
   border-color: transparent;
 }
 .variant_tertiary:hover:not(:disabled),
 .variant_tertiary:active:not(:disabled) {
   background-color: var(--color-interaction-hover);
-  color: var(--color-brand-primary-hover);
+  color: var(--color-text-default);
 }
 
 /* ----- Type: Link (underlined text) ----- */
