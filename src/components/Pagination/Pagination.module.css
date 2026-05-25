@@ -7,7 +7,9 @@
 /* ---------- PageNumber ---------- */
 
 .pageNumber {
-  /* 36×36 square per Figma master. */
+  /* 36×36 square per Figma master 2734:2591.
+   * Default state: transparent bg, no border, label colour
+   * `--secondary/neutral/600` (#636467). */
   width: 36px;
   height: 36px;
   display: inline-flex;
@@ -16,23 +18,29 @@
   padding: 0;
   margin: 0;
 
-  background-color: var(--color-background-white);
-  border: 0;
+  background-color: transparent;
+  /* 1px transparent border so the box doesn't shift when the Selected
+   * state adds its visible border — keeps every page number at exactly
+   * the same 36×36 outer footprint across all three states. */
+  border: 1px solid transparent;
   border-radius: 4px;
 
   font-family: var(--font-family-base);
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  color: var(--color-text-default);
+  color: var(--color-secondary-neutral-600);
 
   cursor: pointer;
-  transition: background-color 120ms ease;
+  transition: background-color 120ms ease, border-color 120ms ease,
+    color 120ms ease;
 }
 
 .pageNumber:hover:not(:disabled):not(.pageNumber_selected) {
-  /* Figma Hover variant fill = Interaction/Hover (#eff0f3). */
-  background-color: var(--color-interaction-hover);
+  /* Figma Hover variant: bg `--secondary/neutral/200` (#dbdcdf),
+   * label `--secondary/neutral/900` (#131417). */
+  background-color: var(--color-secondary-neutral-200);
+  color: var(--color-secondary-neutral-900);
 }
 
 .pageNumber:focus-visible {
@@ -47,8 +55,12 @@
 }
 
 .pageNumber_selected {
-  /* Figma Selected variant fill = Neutral/Light (#f7f8fc). */
-  background-color: var(--color-neutral-light);
+  /* Figma Selected variant: transparent bg, 1px stroke
+   * `--secondary/neutral/200` (#dbdcdf), label
+   * `--secondary/neutral/900` (#131417). */
+  background-color: transparent;
+  border-color: var(--color-secondary-neutral-200);
+  color: var(--color-secondary-neutral-900);
 }
 
 /* ---------- Pagination wrapper ---------- */
