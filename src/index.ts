@@ -79,3 +79,10 @@ export type {
 
 export { GlobalHeader } from "./components/GlobalHeader";
 export type { GlobalHeaderProps } from "./components/GlobalHeader";
+
+export { SideNav } from "./components/SideNav";
+export type {
+  SideNavProps,
+  SideNavItem,
+  SideNavSubItem,
+} from "./components/SideNav";
