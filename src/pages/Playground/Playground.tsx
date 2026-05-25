@@ -343,10 +343,10 @@ export const Playground = () => {
                       className={styles.stickyActions}
                     >
                       <div className={styles.rowActions}>
-                        <Button variant="secondary" size="small">
+                        <Button variant="neutral" size="small">
                           Edit
                         </Button>
-                        <Button variant="neutral" size="small">
+                        <Button variant="tertiary" size="small">
                           Duplicate
                         </Button>
                         <IconButton
