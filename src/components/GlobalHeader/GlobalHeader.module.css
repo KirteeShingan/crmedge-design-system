@@ -65,10 +65,15 @@
   display: block;
 }
 
+.brandGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs, 8px);
+}
+
 .logoSlot {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   text-decoration: none;
   color: inherit;
 }
@@ -79,22 +84,10 @@
   border-radius: 2px;
 }
 
-.logoMark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  background: #5db8fb;
-  border-radius: 4px;
-  color: #ffffff;
-  flex: 0 0 auto;
-}
-
-.wordmark {
+.logo {
   display: block;
-  width: 78px;
-  height: 16px;
+  width: 98px;
+  height: 17px;
   flex: 0 0 auto;
 }
 
@@ -103,7 +96,6 @@
   height: 16px;
   background: var(--color-border-default, #cccccc);
   opacity: 0.6;
-  margin: 0 8px 0 4px;
 }
 
 .tabLabel {
