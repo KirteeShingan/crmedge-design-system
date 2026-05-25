@@ -1,0 +1,154 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 48px;
+  padding-right: var(--spacing-l, 24px);
+  background: var(--color-background-inverse, #1a1a1a);
+  color: var(--color-text-inverse, #ffffff);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  font-family: "Inter", "Gilroy", system-ui, -apple-system, sans-serif;
+}
+
+.leftSet {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-l, 24px);
+}
+
+.rightSet {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs, 8px);
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: var(--spacing-xs, 8px);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-xs, 8px);
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.iconBtn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.iconBtn:focus-visible {
+  outline: 2px solid var(--color-border-focus, #f05424);
+  outline-offset: -2px;
+}
+
+.iconBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.iconBtnSm {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xxs, 4px);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.logoSlot {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoSlot:focus-visible {
+  outline: 2px solid var(--color-border-focus, #f05424);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.logoMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: #5db8fb;
+  border-radius: 4px;
+  color: #ffffff;
+  flex: 0 0 auto;
+}
+
+.wordmark {
+  display: block;
+  width: 78px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.logoDivider {
+  width: 1px;
+  height: 16px;
+  background: var(--color-border-default, #cccccc);
+  opacity: 0.6;
+  margin: 0 8px 0 4px;
+}
+
+.tabLabel {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.avatarBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.avatarBtn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.avatarBtn:focus-visible {
+  outline: 2px solid var(--color-border-focus, #f05424);
+  outline-offset: 0;
+}
+
+.notificationWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.notificationDot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--color-status-error-default, #d92d20);
+  border: 1.5px solid var(--color-background-inverse, #1a1a1a);
+  border-radius: 50%;
+  pointer-events: none;
+}
