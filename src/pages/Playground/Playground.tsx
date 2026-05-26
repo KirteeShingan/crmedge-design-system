@@ -51,7 +51,7 @@ interface Row {
   seoTagOverflow: number;
 }
 
-const ROWS: Row[] = [
+const PAGE_1_ROWS: Row[] = [
   {
     id: "r1",
     title: "Honoring Those Who Served: Franchises that Support…",
@@ -152,6 +152,214 @@ const ROWS: Row[] = [
   },
 ];
 
+const PAGE_2_ROWS: Row[] = [
+  {
+    id: "p2r1",
+    title: "Top 10 Franchise Models Reshaping the Retail Land…",
+    url: "self-44367503.hubspotpagebuilder.com/top-10-franchise-models-reshaping-retail…",
+    status: "published",
+    type: "Article",
+    updated: "Nov 01, 2023",
+    schedule: "NA",
+    by: "Marcus T.",
+    author: "P. H. Nguyen",
+    created: "Oct 30, 2023",
+    seoTag: "Retail",
+    seoTagOverflow: 3,
+  },
+  {
+    id: "p2r2",
+    title: "Digital Transformation in Franchise Operations: A…",
+    url: "self-44367503.hubspotpagebuilder.com/digital-transformation-franchise-operati…",
+    status: "draft",
+    type: "Whitepaper",
+    updated: "Nov 02, 2023",
+    schedule: "NA",
+    by: "Priya V.",
+    author: "C. L. Watkins",
+    created: "Nov 01, 2023",
+    seoTag: "Technology",
+    seoTagOverflow: 7,
+  },
+  {
+    id: "p2r3",
+    title: "Customer Loyalty Programs That Drive Repeat Busin…",
+    url: "self-44367503.hubspotpagebuilder.com/customer-loyalty-programs-repeat-busine…",
+    status: "published",
+    type: "Blog",
+    updated: "Nov 03, 2023",
+    schedule: "NA",
+    by: "Lisa E.",
+    author: "T. R. Patel",
+    created: "Nov 02, 2023",
+    seoTag: "Loyalty",
+    seoTagOverflow: 4,
+  },
+  {
+    id: "p2r4",
+    title: "Franchise Financing 101: What Every Owner Should…",
+    url: "self-44367503.hubspotpagebuilder.com/franchise-financing-101-what-every-owne…",
+    status: "scheduled",
+    type: "Guide",
+    updated: "Nov 04, 2023",
+    schedule: "Nov 10, 2023",
+    by: "Krisha M.",
+    author: "O. B. Harris",
+    created: "Nov 03, 2023",
+    seoTag: "Finance",
+    seoTagOverflow: 2,
+  },
+  {
+    id: "p2r5",
+    title: "How AI is Changing the Way Franchises Hire and…",
+    url: "self-44367503.hubspotpagebuilder.com/ai-changing-franchise-hiring-training…",
+    status: "draft",
+    type: "News",
+    updated: "Nov 05, 2023",
+    schedule: "NA",
+    by: "Sam L.",
+    author: "F. M. Clark",
+    created: "Nov 04, 2023",
+    seoTag: "AI",
+    seoTagOverflow: 6,
+  },
+  {
+    id: "p2r6",
+    title: "Green Franchising: Sustainability Strategies That…",
+    url: "self-44367503.hubspotpagebuilder.com/green-franchising-sustainability-strateg…",
+    status: "published",
+    type: "Editorial",
+    updated: "Nov 06, 2023",
+    schedule: "NA",
+    by: "Jordan K.",
+    author: "S. N. Robinson",
+    created: "Nov 05, 2023",
+    seoTag: "Sustainability",
+    seoTagOverflow: 5,
+  },
+  {
+    id: "p2r7",
+    title: "Multi-Unit Ownership: Pros, Cons, and Growth Str…",
+    url: "self-44367503.hubspotpagebuilder.com/multi-unit-ownership-pros-cons-strategy…",
+    status: "scheduled",
+    type: "Case Study",
+    updated: "Nov 07, 2023",
+    schedule: "Nov 14, 2023",
+    by: "Alex R.",
+    author: "L. A. Torres",
+    created: "Nov 06, 2023",
+    seoTag: "Growth",
+    seoTagOverflow: 3,
+  },
+];
+
+const PAGE_3_ROWS: Row[] = [
+  {
+    id: "p3r1",
+    title: "The Rise of Ghost Kitchens in the Franchise World…",
+    url: "self-44367503.hubspotpagebuilder.com/rise-ghost-kitchens-franchise-world…",
+    status: "published",
+    type: "Blog",
+    updated: "Nov 08, 2023",
+    schedule: "NA",
+    by: "Marcus T.",
+    author: "B. J. Evans",
+    created: "Nov 07, 2023",
+    seoTag: "FoodTech",
+    seoTagOverflow: 4,
+  },
+  {
+    id: "p3r2",
+    title: "Franchise Disclosure Documents: A Beginner's Gui…",
+    url: "self-44367503.hubspotpagebuilder.com/franchise-disclosure-documents-beginne…",
+    status: "draft",
+    type: "Guide",
+    updated: "Nov 09, 2023",
+    schedule: "NA",
+    by: "Priya V.",
+    author: "W. C. Morales",
+    created: "Nov 08, 2023",
+    seoTag: "Legal",
+    seoTagOverflow: 2,
+  },
+  {
+    id: "p3r3",
+    title: "Social Media Marketing for Franchise Locations: B…",
+    url: "self-44367503.hubspotpagebuilder.com/social-media-marketing-franchise-locati…",
+    status: "published",
+    type: "Article",
+    updated: "Nov 10, 2023",
+    schedule: "NA",
+    by: "Lisa E.",
+    author: "I. D. Stewart",
+    created: "Nov 09, 2023",
+    seoTag: "Marketing",
+    seoTagOverflow: 8,
+  },
+  {
+    id: "p3r4",
+    title: "International Expansion: How Brands Go Global thr…",
+    url: "self-44367503.hubspotpagebuilder.com/international-expansion-brands-go-global…",
+    status: "scheduled",
+    type: "Whitepaper",
+    updated: "Nov 11, 2023",
+    schedule: "Nov 18, 2023",
+    by: "Krisha M.",
+    author: "Y. R. Flores",
+    created: "Nov 10, 2023",
+    seoTag: "Global",
+    seoTagOverflow: 5,
+  },
+  {
+    id: "p3r5",
+    title: "Training and Onboarding Best Practices for Franch…",
+    url: "self-44367503.hubspotpagebuilder.com/training-onboarding-best-practices-franc…",
+    status: "published",
+    type: "Case Study",
+    updated: "Nov 12, 2023",
+    schedule: "NA",
+    by: "Sam L.",
+    author: "C. P. Bennett",
+    created: "Nov 11, 2023",
+    seoTag: "Operations",
+    seoTagOverflow: 3,
+  },
+  {
+    id: "p3r6",
+    title: "Supply Chain Resilience: Lessons from Top Franch…",
+    url: "self-44367503.hubspotpagebuilder.com/supply-chain-resilience-lessons-top-fran…",
+    status: "draft",
+    type: "News",
+    updated: "Nov 13, 2023",
+    schedule: "NA",
+    by: "Jordan K.",
+    author: "M. T. Cooper",
+    created: "Nov 12, 2023",
+    seoTag: "Logistics",
+    seoTagOverflow: 6,
+  },
+  {
+    id: "p3r7",
+    title: "Franchise Trends to Watch in 2024: What Experts…",
+    url: "self-44367503.hubspotpagebuilder.com/franchise-trends-watch-2024-experts-say…",
+    status: "published",
+    type: "Editorial",
+    updated: "Nov 14, 2023",
+    schedule: "NA",
+    by: "Alex R.",
+    author: "H. G. Ward",
+    created: "Nov 13, 2023",
+    seoTag: "Trends",
+    seoTagOverflow: 7,
+  },
+];
+
+const PAGE_ROWS: Record<number, Row[]> = {
+  1: PAGE_1_ROWS,
+  2: PAGE_2_ROWS,
+  3: PAGE_3_ROWS,
+};
+
 const badgeFor = (status: RowStatus): ReactNode => {
   if (status === "published") {
     return (
@@ -186,11 +394,13 @@ export const Playground = () => {
     { id: "settings", label: "Settings", icon: <GearIcon /> },
   ];
 
-  const allChecked = selected.size === ROWS.length;
+  const rows = PAGE_ROWS[page] ?? PAGE_1_ROWS;
+
+  const allChecked = selected.size === rows.length;
   const someChecked = selected.size > 0 && !allChecked;
 
   const toggleAll = (checked: boolean) => {
-    setSelected(checked ? new Set(ROWS.map((r) => r.id)) : new Set());
+    setSelected(checked ? new Set(rows.map((r) => r.id)) : new Set());
   };
 
   const toggleRow = (id: string, checked: boolean) => {
@@ -272,7 +482,6 @@ export const Playground = () => {
                 <TableCol width={170} />
                 <TableCol width={170} />
                 <TableCol width={170} />
-                <TableCol width={170} />
                 <TableCol width={180} />
                 <TableCol width={170} />
                 <TableCol width={200} />
@@ -292,7 +501,6 @@ export const Playground = () => {
                   <TableHeaderCell>Updated Date</TableHeaderCell>
                   <TableHeaderCell>Schedule Date</TableHeaderCell>
                   <TableHeaderCell>Updated By</TableHeaderCell>
-                  <TableHeaderCell>Author</TableHeaderCell>
                   <TableHeaderCell>Created Date</TableHeaderCell>
                   <TableHeaderCell>SEO Tags</TableHeaderCell>
                   <TableHeaderCell className={styles.stickyActionsHead}>
@@ -301,7 +509,7 @@ export const Playground = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {ROWS.map((r) => (
+                {rows.map((r) => (
                   <TableRow key={r.id} selected={selected.has(r.id)}>
                     <TableSelectionCell
                       checked={selected.has(r.id)}
@@ -320,7 +528,6 @@ export const Playground = () => {
                     <TableCell type="date">{r.updated}</TableCell>
                     <TableCell type="date">{r.schedule}</TableCell>
                     <TableCell type="text">{r.by}</TableCell>
-                    <TableCell type="text">{r.author}</TableCell>
                     <TableCell type="date">{r.created}</TableCell>
                     <TableCell type="badge">
                       <div className={styles.seoTags}>

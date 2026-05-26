@@ -79,11 +79,11 @@
   height: 36px;
 }
 
-/* Search input itself is locked to 400px. The wrapper inherits that width
- * so the Search root (which we set fullWidth) fills exactly 400px and
+/* Search input itself is locked to 312px. The wrapper inherits that width
+ * so the Search root (which we set fullWidth) fills exactly 312px and
  * never grows with the parent flex row. */
 .searchWrap {
-  width: 400px;
+  width: 312px;
   flex-shrink: 0;
 }
 
