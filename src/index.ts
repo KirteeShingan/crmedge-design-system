@@ -1,8 +1,12 @@
-export { Button } from "./components/Button";
+export { Button, SegmentedButton } from "./components/Button";
 export type {
   ButtonProps,
   ButtonVariant,
   ButtonSize,
+  SegmentedButtonProps,
+  SegmentedButtonSegment,
+  SegmentedButtonVariant,
+  SegmentedButtonSize,
 } from "./components/Button";
 
 export { TextField } from "./components/TextField";
