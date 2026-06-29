@@ -199,8 +199,32 @@
     "xxl":  { "$value": "{size.28}", "$type": "dimension" },
     "xxxl": { "$value": "{size.32}", "$type": "dimension" }
   },
+  "breakpoint": {
+    "mobile":  { "$value": "360px",  "$type": "dimension" },
+    "tablet":  { "$value": "768px",  "$type": "dimension" },
+    "desktop": { "$value": "1024px", "$type": "dimension" },
+    "wide":    { "$value": "1440px", "$type": "dimension" }
+  },
   "grid": {
     "modal":   { "width": { "$value": "658px", "$type": "dimension" } },
-    "tooltip": { "width": { "$value": "352px", "$type": "dimension" } }
+    "tooltip": { "width": { "$value": "352px", "$type": "dimension" } },
+    "columns": {
+      "mobile":  { "$value": 4,  "$type": "number" },
+      "tablet":  { "$value": 8,  "$type": "number" },
+      "desktop": { "$value": 12, "$type": "number" }
+    },
+    "gutter": {
+      "mobile":  { "$value": "{size.16}", "$type": "dimension" },
+      "tablet":  { "$value": "{size.16}", "$type": "dimension" },
+      "desktop": { "$value": "{size.24}", "$type": "dimension" }
+    },
+    "margin": {
+      "mobile":  { "$value": "{size.16}", "$type": "dimension" },
+      "tablet":  { "$value": "{size.24}", "$type": "dimension" },
+      "desktop": { "$value": "{size.32}", "$type": "dimension" }
+    },
+    "container": {
+      "max": { "$value": "1280px", "$type": "dimension" }
+    }
   }
 }
