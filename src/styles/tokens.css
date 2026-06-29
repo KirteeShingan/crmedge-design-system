@@ -85,8 +85,16 @@
   --size-48: 48px;
   --size-52: 52px;
   --size-56: 56px;
+  --breakpoint-mobile: 360px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1440px;
   --grid-modal-width: 658px;
   --grid-tooltip-width: 352px;
+  --grid-columns-mobile: 4;
+  --grid-columns-tablet: 8;
+  --grid-columns-desktop: 12;
+  --grid-container-max: 1280px;
   --color-background-page: var(--color-background-white);
   --color-background-surface: var(--color-background-light-grey);
   --color-background-overlay: var(--color-background-navy-blue);
@@ -145,4 +153,10 @@
   --radius-xl: var(--size-24);
   --radius-xxl: var(--size-28);
   --radius-xxxl: var(--size-32);
+  --grid-gutter-mobile: var(--size-16);
+  --grid-gutter-tablet: var(--size-16);
+  --grid-gutter-desktop: var(--size-24);
+  --grid-margin-mobile: var(--size-16);
+  --grid-margin-tablet: var(--size-24);
+  --grid-margin-desktop: var(--size-32);
 }

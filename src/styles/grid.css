@@ -1,0 +1,138 @@
+/*
+ * Grid utility layer — sits on top of tokens.css.
+ *
+ * Source of truth for the grid system lives in Figma:
+ *   - Foundations (Fixed) → Section / Breakpoints (node 2830:2)
+ *   - Layout Grid styles: "Grid / Mobile" and "Grid / Desktop"
+ *   - Variable collection "Grid" → breakpoint/columns/gutter/margin/container
+ *
+ * The values flow Figma → tokens/figma-export.json → tokens.css → here.
+ * This file ONLY provides utility classes + media queries that drive the
+ * active grid via runtime CSS custom properties.
+ *
+ * Active properties (resolved per breakpoint):
+ *   --grid-cols       — current column count
+ *   --grid-gap        — current gutter
+ *   --grid-margin     — current outer page margin
+ *
+ * Breakpoints (mobile-first):
+ *   ≥ 360 px  → mobile  · 4 cols · gutter 16 · margin 16
+ *   ≥ 768 px  → tablet  · 8 cols · gutter 16 · margin 24
+ *   ≥ 1024 px → desktop · 12 cols · gutter 24 · margin 32
+ *   ≥ 1440 px → wide    · 12 cols · gutter 24 · margin auto (centered, capped at --grid-container-max)
+ */
+
+:root {
+  /* Default = mobile (mobile-first) */
+  --grid-cols: var(--grid-columns-mobile);
+  --grid-gap: var(--grid-gutter-mobile);
+  --grid-margin: var(--grid-margin-mobile);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --grid-cols: var(--grid-columns-tablet);
+    --grid-gap: var(--grid-gutter-tablet);
+    --grid-margin: var(--grid-margin-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --grid-cols: var(--grid-columns-desktop);
+    --grid-gap: var(--grid-gutter-desktop);
+    --grid-margin: var(--grid-margin-desktop);
+  }
+}
+
+/*
+ * .container — page-level wrapper. Full width up to --grid-container-max,
+ * then centered with --grid-margin as horizontal padding.
+ */
+.container {
+  width: 100%;
+  max-width: var(--grid-container-max);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+  box-sizing: border-box;
+}
+
+/*
+ * .row — CSS Grid track that reflects the active column count and gutter.
+ * Children declare their span with .col-span-N.
+ */
+.row {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+/*
+ * Column spans — clamp to the current grid count so a .col-span-12 on
+ * mobile (where --grid-cols = 4) still works (spans the full row).
+ *
+ * Use the breakpoint-prefixed helpers (.md\:col-span-N, .lg\:col-span-N)
+ * to change span at tablet / desktop.
+ */
+.col-span-1  { grid-column: span min(1,  var(--grid-cols)) / span min(1,  var(--grid-cols)); }
+.col-span-2  { grid-column: span min(2,  var(--grid-cols)) / span min(2,  var(--grid-cols)); }
+.col-span-3  { grid-column: span min(3,  var(--grid-cols)) / span min(3,  var(--grid-cols)); }
+.col-span-4  { grid-column: span min(4,  var(--grid-cols)) / span min(4,  var(--grid-cols)); }
+.col-span-5  { grid-column: span min(5,  var(--grid-cols)) / span min(5,  var(--grid-cols)); }
+.col-span-6  { grid-column: span min(6,  var(--grid-cols)) / span min(6,  var(--grid-cols)); }
+.col-span-7  { grid-column: span min(7,  var(--grid-cols)) / span min(7,  var(--grid-cols)); }
+.col-span-8  { grid-column: span min(8,  var(--grid-cols)) / span min(8,  var(--grid-cols)); }
+.col-span-9  { grid-column: span min(9,  var(--grid-cols)) / span min(9,  var(--grid-cols)); }
+.col-span-10 { grid-column: span min(10, var(--grid-cols)) / span min(10, var(--grid-cols)); }
+.col-span-11 { grid-column: span min(11, var(--grid-cols)) / span min(11, var(--grid-cols)); }
+.col-span-12 { grid-column: span min(12, var(--grid-cols)) / span min(12, var(--grid-cols)); }
+
+.col-span-full { grid-column: 1 / -1; }
+
+/* Tablet overrides (≥ 768 px) */
+@media (min-width: 768px) {
+  .md\:col-span-1  { grid-column: span 1  / span 1; }
+  .md\:col-span-2  { grid-column: span 2  / span 2; }
+  .md\:col-span-3  { grid-column: span 3  / span 3; }
+  .md\:col-span-4  { grid-column: span 4  / span 4; }
+  .md\:col-span-5  { grid-column: span 5  / span 5; }
+  .md\:col-span-6  { grid-column: span 6  / span 6; }
+  .md\:col-span-7  { grid-column: span 7  / span 7; }
+  .md\:col-span-8  { grid-column: span 8  / span 8; }
+  .md\:col-span-full { grid-column: 1 / -1; }
+}
+
+/* Desktop overrides (≥ 1024 px) */
+@media (min-width: 1024px) {
+  .lg\:col-span-1  { grid-column: span 1  / span 1; }
+  .lg\:col-span-2  { grid-column: span 2  / span 2; }
+  .lg\:col-span-3  { grid-column: span 3  / span 3; }
+  .lg\:col-span-4  { grid-column: span 4  / span 4; }
+  .lg\:col-span-5  { grid-column: span 5  / span 5; }
+  .lg\:col-span-6  { grid-column: span 6  / span 6; }
+  .lg\:col-span-7  { grid-column: span 7  / span 7; }
+  .lg\:col-span-8  { grid-column: span 8  / span 8; }
+  .lg\:col-span-9  { grid-column: span 9  / span 9; }
+  .lg\:col-span-10 { grid-column: span 10 / span 10; }
+  .lg\:col-span-11 { grid-column: span 11 / span 11; }
+  .lg\:col-span-12 { grid-column: span 12 / span 12; }
+  .lg\:col-span-full { grid-column: 1 / -1; }
+}
+
+/*
+ * Show / hide helpers — handy for swapping mobile vs. desktop chrome
+ * (e.g. an off-canvas SideNav drawer vs. the docked rail).
+ */
+.hide-on-mobile  { display: none; }
+.show-on-mobile  { display: initial; }
+
+@media (min-width: 768px) {
+  .hide-on-mobile  { display: initial; }
+  .show-on-mobile  { display: none; }
+  .hide-on-tablet  { display: none; }
+}
+
+@media (min-width: 1024px) {
+  .hide-on-tablet  { display: initial; }
+  .hide-on-desktop { display: none; }
+}
